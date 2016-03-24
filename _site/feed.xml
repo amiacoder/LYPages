@@ -1,0 +1,1870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>amiacoder&#39;s blog</title>
+    <description>关于前端与设计、黑客与画家 | 黄玄，Web &amp; Mobile Lover，Front-End Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。</description>
+    <link>http://huangxuan.me/</link>
+    <atom:link href="http://huangxuan.me/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 24 Mar 2016 14:17:18 +0800</pubDate>
+    <lastBuildDate>Thu, 24 Mar 2016 14:17:18 +0800</lastBuildDate>
+    <generator>Jekyll v3.1.1</generator>
+    
+      <item>
+        <title>React vs Angular 2：冰与火之歌「译」</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;http://zhuanlan.zhihu.com/FrontendMagazine/20549104&quot;&gt;我在知乎专栏「前端外刊评论」上发表的文章&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://angular.io/&quot;&gt;Angular 2&lt;/a&gt; 已经发布 Beta 版，而且似乎很有信心在 2016 年成为热门框架。是时候进行一场巅峰对决了，我们来看看它如何与 &lt;a href=&quot;https://facebook.github.io/react/&quot;&gt;React&lt;/a&gt; 这个 2015 年的新宠抗衡。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;免责声明：&lt;/strong&gt;我之前很喜欢使用 Angular 1，不过在 2015 年转到了 React。最近我也在 Pluralsight 上发布了一门关于 &lt;a href=&quot;https://www.pluralsight.com/courses/react-flux-building-applications&quot;&gt;React 和 Flux 的课程&lt;/a&gt;（&lt;a href=&quot;http://app.pluralsight.com/signup&quot;&gt;免费试学&lt;/a&gt;）。所以，&lt;strong&gt;是的，我本人是有偏见的，但我不会偏袒任何一方。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;好了，我们开始吧，这场对决将会非常血腥。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn-images-1.medium.com/max/800/1*MRPl_SNuRGJchb6eOAnkSA.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;图片来源：&lt;a href=&quot;https://twitter.com/jwcarroll&quot;&gt;@jwcarrol&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;两者根本不具有可比性！&lt;/h2&gt;
+
+&lt;p&gt;是的是的，Angular 是框架，React 是类库。所以有人觉得比较这两者没有逻辑性可言。大错特错！&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;选择 Angular 还是 React 就像选择直接购买成品电脑还是买零件自己组装一样。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;两者的优缺点本文都会提及，我会拿 React 语法和组件模型跟 Angular 的语法和组件模型做对比。这就像是拿成品电脑的 CPU 跟零售的 CPU 做对比，没有任何不妥。&lt;/p&gt;
+
+&lt;h2 id=&quot;angular-2-&quot;&gt;Angular 2 的优点&lt;/h2&gt;
+
+&lt;p&gt;我们先看 Angular 相对 React 有哪些优势。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;&lt;strong&gt;无选择性疲劳&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Angular 是一个完整的框架，本身就提供了比 React 多得多的建议和功能。而要用 React，开发者通常还需要借助别的类库来打造一个真正的应用。比如你可能需要额外的库来处理路由、强制单向数据流、进行 API 调用、做测试以及管理依赖等等。要做的选择和决定太多了，让人很有压力。这也是为什么 React 有那么多的入门套件的原因（我自己就写了两个：&lt;a href=&quot;https://github.com/coryhouse/react-flux-starter-kit&quot;&gt;1&lt;/a&gt;、&lt;a href=&quot;https://github.com/coryhouse/react-slingshot&quot;&gt;2&lt;/a&gt;）。&lt;/p&gt;
+
+&lt;p&gt;Angular 自带了不少主张，所以能够帮助你更快开始，不至于因为要做很多决定而无所适从。这种强制的一致性也能帮助新人更快适应其开发模式，并使得开发者在不同团队间切换更具可行性。&lt;/p&gt;
+
+&lt;p&gt;Angular 核心团队让我非常欣赏的一点是，他们拥抱了 TypeScript，这就造成了另一个优势。&lt;/p&gt;
+
+&lt;h4 id=&quot;typescript--&quot;&gt;TypeScript = 阳关大道&lt;/h4&gt;
+
+&lt;p&gt;没错，并非所有人都喜欢 TypeScript，但是 Angular 2 毅然决然地选择了它确实是个巨大的优势。反观 React，网上的各种示例应用令人沮丧地不一致——ES5 和 ES6 的项目基本上各占一半，而且目前存在&lt;a href=&quot;http://jamesknelson.com/should-i-use-react-createclass-es6-classes-or-stateless-functional-components/&quot;&gt;三种不同的组件声明方式&lt;/a&gt;。这无疑给初学者造成了困惑。（Angular 还拥抱了装饰器（decorator）而不是继承（extends）——很多人认为这也是个加分项）。&lt;/p&gt;
+
+&lt;p&gt;尽管 Angular 2 并不强制使用 TypeScript，但显然的是，Angular 的核心团队默认在文档中使用 TypeScript。这意味着相关的示例应用和开源项目更有可能保持一致性。Angular 已经提供了&lt;a href=&quot;https://angular.io/docs/ts/latest/quickstart.html&quot;&gt;非常清晰的关于如何使用 TypeScript 编译器的例子&lt;/a&gt;。（诚然，目前&lt;a href=&quot;http://angularjs.blogspot.com/2015/09/angular-2-survey-results.html&quot;&gt;并非所有人都在拥抱 TypeScript&lt;/a&gt;，但我有理由相信等到正式发布之后，TypeScript 会成为事实上的标准）。这种一致性应该会帮助初学者避免在学习 React 时遇到的疑惑和选择困难。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;极少的代码变动&lt;/h4&gt;
+
+&lt;p&gt;2015 年是 &lt;a href=&quot;https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4#.559iqxb39&quot;&gt;JavaScript 疲劳&lt;/a&gt;元年，React 可以说是罪魁祸首。而且 React 尚未发布 1.0，所以未来还可能有很多变数。React 生态圈依旧在快速地变动着，尤其是&lt;a href=&quot;https://github.com/kriasoft/react-starter-kit/issues/22&quot;&gt;各种 Flux 变种&lt;/a&gt;和&lt;a href=&quot;https://github.com/rackt/react-router&quot;&gt;路由&lt;/a&gt;。也就是说，你今天用 React 写的所有东西，都有可能在 React 1.0 正式发布后过时，或者必须进行大量的改动。&lt;/p&gt;
+
+&lt;p&gt;相反，Angular 2 是一个对已经成熟完整框架（Angular 1）的重新发明，而且经过仔细、系统的设计。所以 Angular 不大可能在正式发布后要求已有项目进行痛苦的代码变动。Angular 作为一个完整的框架，你在选择它的时候，也会信任其开发团队，相信他们会认真决定框架的未来。而使用 React，一切都需要你自己负责，你要自己整合一大堆开源类库来打造一个完整的应用，类库之间互不相干且变动频繁。这是一个令人沮丧的耗时工作，而且永远没有尽头。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;&lt;strong&gt;广泛的工具支持&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;后面我会说，我认为 React 的 JSX 是非常耀眼的亮点。然而要使用 JSX，你需要选择支持它的工具。尽管 React 已经足够流行，工具支持不再是什么问题，但诸如 IDE 和 lint 工具等新工具还不大可能很快得到支持。Angular 2 的模版是保存在一个字符串或独立的 HTML 文件中的，所以不要求特殊的工具支持（不过似乎 Angular 字符串模版的智能解析工具已经呼之欲出了）。&lt;/p&gt;
+
+&lt;h4 id=&quot;web-components-&quot;&gt;Web Components 友好&lt;/h4&gt;
+
+&lt;p&gt;Angular 2 还拥抱了 Web Component 标准。唉，真尴尬我居然一开始忘记提到这点了——最近我还发布了一门关于&lt;a href=&quot;https://www.pluralsight.com/courses/web-components-shadow-dom&quot;&gt;Web Components 课程&lt;/a&gt;呢！简单来说，把 Angular 2 组件转换成原生 Web Components 应该会比 React 组件容易得多。固然 Web Components 的&lt;a href=&quot;http://jonrimmer.github.io/are-we-componentized-yet/&quot;&gt;浏览器支持度依然很弱&lt;/a&gt;，但长期来看，对 Web Components 友好是很大的优势。&lt;/p&gt;
+
+&lt;p&gt;Angular 的实现有其自身的局限和陷阱，这正好让我过渡到对 React 优势的讨论。&lt;/p&gt;
+
+&lt;h3 id=&quot;react-&quot;&gt;React 的优点&lt;/h3&gt;
+
+&lt;p&gt;现在，让我们看看是什么让 React 如此与众不同。&lt;/p&gt;
+
+&lt;h4 id=&quot;jsx&quot;&gt;&lt;strong&gt;JSX&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;JSX 是一种类似 HTML 的语法，但它实际上会被编译成 JavaScript。将标签与代码混写在同一个文件中意味着输入一个组件的函数或者变量时你将享受到自动补全的福利。而 Angular 基于字符串的模版就相形见绌了：很多编辑器都不会高亮它们（只会显示单色）、只有有限的代码补全支持，并且一直到运行时才会报错。并且，通常你也只能得到很有限的错误提示。不过，Angular 的团队&lt;a href=&quot;https://github.com/angular/angular/issues/4417&quot;&gt;造了一个自己的 HTML 解析器来解决这个问题&lt;/a&gt;。（叼叼叼！）&lt;/p&gt;
+
+&lt;p&gt;如果你不喜欢 Angular 的字符串模版，你可以把模版移到一个单独的文件里去。不过这样你就回到了我认为的“老样子”：你需要在自己脑袋里记住这两个文件的关联，不但没有代码自动补全，也没有任何编译时检查来协助你。这听起来可能并不算什么……除非你已经爱上了与 React 相伴的日子。在同一个文件中组合组件还能享受编译时的检查，大概是 JSX 最与众不同的地方之一了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://p5.qhimg.com/d/inn/8a99f370/2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;对比 Angular 2 与 React 在标签忘记闭合时是如何表现的。&lt;/p&gt;
+
+&lt;p&gt;关于为什么 JSX 是一个巨大的优势，可以看看 &lt;a href=&quot;https://medium.com/@housecor/react-s-jsx-the-other-side-of-the-coin-2ace7ab62b98#.5007n49wq&quot;&gt;JSX：硬币的另一面（JSX: The Other Side of the Coin）&lt;/a&gt;. （P.S. 这是作者写的另一篇文章，如果大家希望我们可以把这篇也翻了，欢迎在评论区举手）&lt;/p&gt;
+
+&lt;h4 id=&quot;react--1&quot;&gt;React 报错清晰快速&lt;/h4&gt;
+
+&lt;p&gt;当你在 React 的 JSX 中不小心手抖打错时，它并不会被编译。这是一件非常美妙的事情：无论你是忘记闭合了标签还是引用了一个不存在的属性（property），你都可以立刻知道到底是哪一行出错了。&lt;strong&gt;JSX 编译器会指出你手抖的具体行号&lt;/strong&gt;，彻彻底底加速你的开发。&lt;/p&gt;
+
+&lt;p&gt;相反，当你在 Angular 2 中不小心敲错了一个变量时，鸦雀无声。&lt;strong&gt;Angular 2 并不会在编译时做什么，它会等到运行时才静默报错。&lt;/strong&gt;它报错得&lt;em&gt;如此之慢&lt;/em&gt;，我加载完整个应用然后奇怪为什么我的数据没有显示出来呢？这太不爽了。&lt;/p&gt;
+
+&lt;h4 id=&quot;react--javascript-&quot;&gt;React 以 JavaScript 为中心&lt;/h4&gt;
+
+&lt;p&gt;终于来了。这才是 React 和 Angular 的根本区别。&lt;strong&gt;很不幸，Angular 2 仍然是以 HTML 而非 JavaScript 为中心的。&lt;/strong&gt;Angular 2 并没有解决它设计上的根本问题：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Angular 2 继续把 “JS” 放到 HTML 里。React 则把 “HTML” 放到 JS 里。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这种分歧带来的影响真是再怎么强调也不为过。它们从根本上影响着开发体验。Angular 以 HTML 为中心的设计留下了巨大的缺陷。正如我在 &lt;a href=&quot;https://medium.com/@housecor/react-s-jsx-the-other-side-of-the-coin-2ace7ab62b98#.jqh5kkxlk&quot;&gt;JSX：硬币的另一面&lt;/a&gt; 中所说的，JavaScript 远比 HTML 要强大。因此，&lt;strong&gt;增强 JavaScript 让其支持标签要比增强 HTML 让其支持逻辑要合理得多&lt;/strong&gt;。无论如何，HTML 与 JavaScript 都需要某种方式以粘合在一起。React 以 JavaScript 为中心的思路从根本上优于 Angular、Ember、Knockout 这些以 HTML 为中心的思路。&lt;/p&gt;
+
+&lt;p&gt;让我们来看看为什么。&lt;/p&gt;
+
+&lt;h4 id=&quot;react--javascript---&quot;&gt;React 以 JavaScript 为中心的设计 = 简约&lt;/h4&gt;
+
+&lt;p&gt;Angular 2 延续了 Angular 1 试图让 HTML 更加强大的老路子。所以即使是像循环或者条件判断这样的简单任务你也不得不使用 Angular 2 的独特语法来完成。例如，Angular 2 通过两种语法同时提供了单向数据绑定与双向数据绑定，可不幸的是它们实在差得有点多：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+{{myVar}}        //单向数据绑定
+ngModel=&quot;myVar&quot;  //双向数据绑定
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;在 React 中，数据绑定语法不取决于数据流的单双向（数据绑定的单双向是在其他地方处理的，不得不说我觉得理应如此）。不管是单向还是双向数据流，绑定语法都是这样的：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+{myVar}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Angular 2 的内联母版（inline master templates）使用了这样的语法：&lt;/p&gt;
+
+&lt;p&gt;```html&lt;/p&gt;
+&lt;ul&gt;
+  &amp;lt;li *ngFor=&quot;#hero of heroes&quot;&amp;gt;
+    {{hero.name}}
+  
+&lt;/ul&gt;
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;上面这个代码片段遍历了一组 hero，而我比较关心的几点是：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;通过星号来声明一个“母版”实在是太晦涩了&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hero&lt;/code&gt; 前的英镑符号（&lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt;）用于声明一个局部模版变量。这个概念感觉非常鸡肋（如果你偏好不使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;#&lt;/code&gt;，你也可以使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;var-&lt;/code&gt; 前缀写法）&lt;/li&gt;
+  &lt;li&gt;为 HTML 加入了循环语义的HTML 特性（attribute）&lt;code class=&quot;highlighter-rouge&quot;&gt;ngFor&lt;/code&gt; 是 Angular 特有的东西&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;相比上面 Angular 2 的语法，React 的语法可是纯净的 JavaScript （不过我得承认下面的属性 &lt;code class=&quot;highlighter-rouge&quot;&gt;key&lt;/code&gt; 是个 React 的私货）&lt;/p&gt;
+
+&lt;p&gt;```html&lt;/p&gt;
+&lt;ul&gt;
+  { heroes.map(hero =&amp;gt;
+    &amp;lt;li key={hero.id}&amp;gt;{hero.name}
+  )}
+&lt;/ul&gt;
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;鉴于 JS 原生支持循环，React JSX 利用 JS 的力量来做到这类事情简直易如反掌，配合 &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt; 能做的还远不止此。&lt;/p&gt;
+
+&lt;p&gt;去看看 &lt;a href=&quot;https://angular.io/docs/ts/latest/guide/cheatsheet.html&quot;&gt;Angular 2 速查表&lt;/a&gt;？那不是 HTML，也不是 JavaScript……这叫 &lt;strong&gt;Angular&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;读懂 Angular：&lt;/strong&gt; 学一大堆 Angular 特有的语法&lt;/p&gt;
+
+  &lt;p&gt;读懂 React： 学 JavaScript&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;React 因为语法和概念的简约而与众不同。我们不妨品味下当今流行的 JS 框架/库都是如何实现遍历的：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+Ember: 
+Angular 1: ng-repeat
+Angular 2: ngFor
+Knockout: data-bind=&quot;foreach&quot;
+React: 直接用 JS 就好啦 :)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;除了 React，所有其它框架都用自己的专有语法重新发明了一个我们在 JavaScript 常见得不能再常见的东西：&lt;strong&gt;循环&lt;/strong&gt;。这大概就是 React 的美妙之处，利用 JavaScript 的力量来处理标签，而不是什么奇怪的新语法。&lt;/p&gt;
+
+&lt;p&gt;Angular 2 中的奇怪语法还有点击事件的绑定：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+(click)=&quot;onSelect(hero)&quot;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;相反，React 再一次使用了普通的 JavaScript：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+onClick={this.onSelect.bind(this, hero)}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;并且，鉴于 React 内建了一个模拟的事件机制（Angular 2 也有），你并不需要去担心使用内联语法声明事件处理器所暗含的性能问题。&lt;/p&gt;
+
+&lt;p&gt;为什么要强迫自己满脑子都是一个框架的特殊语法呢？为什么不直接拥抱 JS 的力量？&lt;/p&gt;
+
+&lt;h4 id=&quot;section-4&quot;&gt;奢华的开发体验&lt;/h4&gt;
+
+&lt;p&gt;JSX 具备的代码自动补全、编译时检查与丰富的错误提示已经创造了非常棒的开发体验，既为我们减少了输入，与节约了时间。而配合上热替换（hot reloading）与时间旅行（time travel），你将获得前所未有的开发体验，效率高到飞起。&lt;/p&gt;
+
+&lt;p&gt;原文这里链了个 Youtube 上的视频：&lt;a href=&quot;https://www.youtube.com/watch?v=xsSnOQynTHs&amp;amp;feature=youtu.be&quot;&gt;Dan Abramov - Live React: Hot Reloading with Time Travel at react-europe 2015&lt;/a&gt;，大家自备梯子。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-5&quot;&gt;担心框架的大小？&lt;/h4&gt;
+
+&lt;p&gt;这里是一些常见框架/库压缩后的大小（&lt;a href=&quot;https://gist.github.com/Restuta/cda69e50a853aa64912d&quot;&gt;来源&lt;/a&gt;）：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Angular 2:&lt;/strong&gt; 566k (766k with RxJS)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ember:&lt;/strong&gt; 435k&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js&quot;&gt;&lt;strong&gt;Angular 1&lt;/strong&gt;&lt;/a&gt;&lt;strong&gt;:&lt;/strong&gt; 143k&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;React + Redux:&lt;/strong&gt; 139k&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;列出的都是框架级的、用于浏览器且压缩后的大小（但并未 gzip）。需要补充的是，Angular 2 的尺寸在最终版本发布时应该会有所减小。&lt;/p&gt;
+
+&lt;p&gt;为了做一个更真实的对比，我将 Angular 2 &lt;a href=&quot;https://angular.io/docs/ts/latest/tutorial/&quot;&gt;官方教程&lt;/a&gt;中的 Tour of Heroes 应用用 Angular 2 和 React（还用上了新的 &lt;a href=&quot;https://github.com/coryhouse/react-slingshot&quot;&gt;React Slingshot&lt;/a&gt; 入门套件）都实现了一遍，结果如何呢？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/coryhouse/angular-2-tour-of-heroes/tree/master&quot;&gt;&lt;strong&gt;Angular 2&lt;/strong&gt;&lt;/a&gt;&lt;strong&gt;:&lt;/strong&gt; 764k 压缩后&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/coryhouse/react-tour-of-heroes&quot;&gt;&lt;strong&gt;React + Redux&lt;/strong&gt;&lt;/a&gt;&lt;strong&gt;:&lt;/strong&gt; 151k 压缩后&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;可以看到，&lt;strong&gt;做一个差不多的东西，Angular 2 目前的尺寸是 React + Redux 的五倍还多&lt;/strong&gt;。重要的事情再说一遍，Angular 2 的最终版本应该会减重。&lt;/p&gt;
+
+&lt;p&gt;不过，我承认关于框架大小的担忧可能被夸大了：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;大型应用往往至少有几百 KB 的代码，经常还更多，不管它们是不是使用了框架。开发者需要做很多的抽象来构建一个复杂的软件。无论这些抽象是来自框架的还是自己手写的，它都会对应用的加载性能造成负面影响。&lt;/p&gt;
+
+  &lt;p&gt;就算你完全杜绝框架的使用，许多应用仍然是几百 KB 的 JavaScript 在那。 — Tom Dale &lt;a href=&quot;http://tomdale.net/2015/11/javascript-frameworks-and-mobile-performance/&quot;&gt;JavaScript Frameworks and Mobile Performance&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Tom 的观点是对的。像 Angular、Ember 这样的框架之所以更大是因为它们自带了更多的功能。&lt;/p&gt;
+
+&lt;p&gt;但是，我关心的点在于：很多应用其实用不到这种大型框架提供的所有功能。在这个越来越拥抱微服务、微应用、&lt;a href=&quot;http://www.npmjs.com&quot;&gt;单一职责模块（single-responsibility packages）&lt;/a&gt;的时代，&lt;strong&gt;React 通过让你自己挑选必要模块，让你的应用大小真正做到量身定做&lt;/strong&gt;。在这个有着 200,000 个 npm 模块的世界里，这点非常强大。&lt;/p&gt;
+
+&lt;h4 id=&quot;react-unix-httpsenwikipediaorgwikiunixphilosophy&quot;&gt;React 信奉&lt;a href=&quot;https://en.wikipedia.org/wiki/Unix_philosophy&quot;&gt;Unix 哲学&lt;/a&gt;.&lt;/h4&gt;
+
+&lt;p&gt;React 是一个类库。它的哲学与 Angular、Ember 这些大而全的框架恰恰相反。你可以根据场景挑选各种时髦的类库，搭配出你的最佳组合。JavaScript 世界在飞速发展，React 允许你不断用更好的类库去迭代你应用中的每个小部分，而不是傻等着你选择的框架自己升级。&lt;/p&gt;
+
+&lt;p&gt;Unix 久经沙场屹立不倒，原因就是：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;小而美、可组合、目的单一，这种哲学永远不会过时。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;React 作为一个专注、可组合并且目的单一的工具，已经被&lt;a href=&quot;https://github.com/facebook/react/wiki/Sites-Using-React&quot;&gt;全世界的各大网站们&lt;/a&gt;使用，预示着它的前途光明（当然，Angular 也被用于&lt;a href=&quot;https://www.madewithangular.com/#/&quot;&gt;许多大牌网站&lt;/a&gt;）。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-6&quot;&gt;谢幕之战&lt;/h4&gt;
+
+&lt;p&gt;Angular 2 相比第一代有着长足的进步。新的组件模型比第一代的指令（directives）易学许多；新增了对于同构／服务器端渲染的支持；使用虚拟 DOM 提供了 3-10 倍的性能提升。这些改进使得 Angular 2 与 React 旗鼓相当。不可否认，它功能齐全、观点鲜明，能够显著减少 “JavaScript 疲劳” 。&lt;/p&gt;
+
+&lt;p&gt;不过，Angular 2 的大小和语法都让我望而却步。Angular 致力的 HTML 中心设计比 React 的 JavaScript 中心模型要复杂太多。在 React 中，你并不需要学习 &lt;code class=&quot;highlighter-rouge&quot;&gt;ng-什么什么&lt;/code&gt; 这种框架特有的 HTML 补丁（shim），你只要写 JavaScript 就好了。这才是我相信的未来。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;著作权声明&lt;/h3&gt;
+
+&lt;p&gt;本文译自 &lt;a href=&quot;https://medium.freecodecamp.com/angular-2-versus-react-there-will-be-blood-66595faafd51#.v4y4euy1r&quot;&gt;Angular 2 versus React: There Will Be Blood&lt;/a&gt;，其实&lt;a href=&quot;http://www.w3ctech.com/topic/1675?from=timeline&amp;amp;isappinstalled=0&quot;&gt;之前有人翻译过&lt;/a&gt;，但是翻得水平有一点不忍直视，我们不希望浪费这篇好文章。&lt;br /&gt;
+本文由 &lt;a href=&quot;https://www.zhihu.com/people/li-ling-hao&quot;&gt;@李凌豪&lt;/a&gt; &lt;a href=&quot;https://www.zhihu.com/people/huxpro&quot;&gt;@黄玄&lt;/a&gt; 联合翻译，首次发布于&lt;a href=&quot;http://zhuanlan.zhihu.com/FrontendMagazine&quot;&gt;前端外刊评论 · 知乎专栏&lt;/a&gt;，转载请保留原文链接 ;)&lt;/p&gt;
+</description>
+        <pubDate>Mon, 01 Feb 2016 20:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2016/02/01/React-vs-Angular2/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2016/02/01/React-vs-Angular2/</guid>
+        
+        <category>前端开发</category>
+        
+        <category>JavaScript</category>
+        
+        <category>译文</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>都 2015 年了，CSS 怎么还是这么糟糕</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;下滑这里查看更多内容&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;watch-slides-httphuangxuanmecss-sucks-2015&quot;&gt;&lt;a href=&quot;http://huangxuan.me/css-sucks-2015&quot;&gt;Watch Slides →&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://huangxuan.me/css-sucks-2015/attach/qrcode.png&quot; width=&quot;350&quot; height=&quot;350&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;small class=&quot;img-hint&quot;&gt;你也可以通过扫描二维码在手机上观看&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;这个 Web Slides 开源在&lt;a href=&quot;https://github.com/Huxpro/css-sucks-2015&quot;&gt;我的 Github 上&lt;/a&gt;，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork &amp;amp; pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目&lt;/p&gt;
+
+&lt;h3 id=&quot;catalog&quot;&gt;Catalog&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Document Times
+    &lt;ul&gt;
+      &lt;li&gt;Frameworks&lt;/li&gt;
+      &lt;li&gt;Style Guide
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;OOCSS&lt;/strong&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;SMACSS&lt;/strong&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Pre-processer&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;PostCSS&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Application Times
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Shadow DOM&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;CSS “4”&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;Naming Convention
+        &lt;ul&gt;
+          &lt;li&gt;&lt;strong&gt;BEM&lt;/strong&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;SUIT&lt;/strong&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;CSS in JS&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;CSS Modules&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Interoperable CSS&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;PostCSS, again&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;My Opinionated Proposal
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;POCss&lt;/strong&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pocss-page-override-components-css&quot;&gt;POCss: Page Override Components CSS&lt;/h2&gt;
+
+&lt;h3 id=&quot;scoping-components-brsmall-styleline-height2emcss-blocks-should-only-be-used-inside-a-component-of-the-same-namesmall&quot;&gt;1. Scoping Components &lt;br /&gt;&lt;small style=&quot;line-height:2em;&quot;&gt;&lt;em&gt;CSS Blocks should only be used inside a component of the same name.&lt;/em&gt;&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;scss
+// Component/index.scss
+.ComponentName {
+    &amp;amp;--mofierName {}
+    &amp;amp;__decendentName {
+        &amp;amp;--modifierName {}
+    }
+    .isStateOfComponent {}
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+// Component/index.js
+require(&#39;./index.scss&#39;);
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;CSS is &lt;em&gt;always bundled&lt;/em&gt; with components&lt;br /&gt;(from loading, mount to unmount)&lt;/p&gt;
+
+&lt;h3 id=&quot;components-can-be-overrode-by-pages-brsmall-styleline-height2emthere-is-always-requirements-to-rewrite-styles-of-components-in-pagessmall&quot;&gt;2. Components can be Overrode by Pages &lt;br /&gt;&lt;small style=&quot;line-height:2em;&quot;&gt;&lt;em&gt;There is always requirements to rewrite styles of components in pages&lt;/em&gt;&lt;/small&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;scss
+// Pages/PageA.scss
+#PageA {
+    .pagelet-name {
+        .pagelet-descendent-name {}
+    }
+    .ComponentName{ /* override */ }
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;javascript
+// Pages/index.js
+require(&#39;./PageA.scss&#39;);
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;#Page&lt;/em&gt; for absolutely scoping between pages&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;.pagelet-name&lt;/em&gt; should be lowercase to prevent conflicting with components&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;why-poc&quot;&gt;Why POC?&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;It’s technology-agnostic&lt;/strong&gt;
+&lt;small&gt;
+  &lt;em&gt;One css framework can be played with whatever technology stacks&lt;/em&gt;&lt;br /&gt;
+  &lt;em&gt;You can combined Scss, PostCSS and whatever you want&lt;/em&gt;
+&lt;/small&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Solving problems, and easy&lt;/strong&gt;
+&lt;small&gt;
+  &lt;em&gt;Makes reading and teamwork much easier&lt;/em&gt;&lt;br /&gt;
+  &lt;em&gt;Get all benefit from BEM, SUITCSS and others&lt;/em&gt;
+&lt;/small&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Leverage the power of cascading properly&lt;/strong&gt;
+&lt;small&gt;
+  &lt;em&gt;Scoping components but allow reasonable overriding&lt;/em&gt;&lt;br /&gt;
+  &lt;em&gt;It’s pragmatic, flexible and hitting the sweet spot&lt;/em&gt;
+&lt;/small&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;thanks&quot;&gt;Thanks&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://lab.hakim.se/reveal-js&quot;&gt;Reveal.js&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2015/12/28/css-sucks-2015/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2015/12/28/css-sucks-2015/</guid>
+        
+        <category>前端开发</category>
+        
+        <category>CSS</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>iOS 9，为前端世界都带来了些什么？「译」</title>
+        <description>&lt;p&gt;2015 年 9 月，Apple 重磅发布了全新的 iPhone 6s/6s Plus、iPad Pro 与全新的操作系统 watchOS 2 与 tvOS 9（是的，这货居然是第 9 版），加上已经发布的 iOS 9，它们都为前端世界带来了哪些变化呢？作为一个 web 开发者，是时候站在我们的角度来说一说了！&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;注！&lt;/strong&gt; 该译文存在大量英文术语，笔者将默认读者知晓 ES6、viewport、native app、webview 等常用前端术语，并不对这些已知术语进行汉语翻译
+对于新发布或较新的产品名称与技术术语，诸如 Apple Pen、Split View 等专有名词，笔者将在文中使用其英文名，但会尝试对部分名词进行汉语标注
+另外，出于对 wiki 式阅读的偏爱，笔者为您添加了很多额外的链接，方便您查阅文档或出处&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;简而言之&lt;/h3&gt;
+
+&lt;p&gt;如果你不想阅读整篇文章，这里为你准备了一个总结：&lt;/p&gt;
+
+&lt;h6 id=&quot;section-1&quot;&gt;新的设备特性&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;iPhone 6s 与 6s Plus 拥有 &lt;strong&gt;“&lt;a href=&quot;http://www.apple.com/iphone-6s/3d-touch/&quot;&gt;3D Touch&lt;/a&gt;”&lt;/strong&gt;，这是一个全新的硬件特性，它可以侦测压力，是一个可以让你拿到手指压力数据的 API&lt;/li&gt;
+  &lt;li&gt;iPad Pro 的 viewport 为 1024px，与以往的 iPad 全都不同&lt;/li&gt;
+  &lt;li&gt;想在 iPad Pro 上支持新的 Apple Pen？不好意思，目前似乎并没有适用于网站的 API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;web-&quot;&gt;新的操作系统特性（与 web 相关的）&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;iPad 上的 Safari 现在可以通过 &lt;a href=&quot;https://developer.apple.com/library/prerelease/ios/documentation/WindowsViews/Conceptual/AdoptingMultitaskingOniPad/QuickStartForSlideOverAndSplitView.html#//apple_ref/doc/uid/TP40015145-CH13-SW1&quot;&gt;Split View&lt;/a&gt;（分屏视图）与其他应用一起使用，这意味着新的 viewport 尺寸将会越来越常见&lt;/li&gt;
+  &lt;li&gt;新的 Safari View Controller（&lt;a href=&quot;https://developer.apple.com/library/prerelease/ios/documentation/SafariServices/Reference/SFSafariViewController_Ref/index.html#//apple_ref/occ/cl/SFSafariViewController&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SFSafariViewController&lt;/code&gt;&lt;/a&gt;）可以让你在 native app 内提供与 Safari 界面、行为连贯一致的应用内网页浏览体验&lt;/li&gt;
+  &lt;li&gt;注意啦！Safari 新加入了 Content Blocker（内容拦截器）。以后，并不是所有的访问都一定会出现在你的 Google Analytics 了&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12&quot;&gt;Universal Links&lt;/a&gt; 可以让应用的拥有者在 iOS 内部“占有”自己的域名。因此，访问 yourdomain.com 将会打开你的应用（类似 Android 的 Intents 机制）&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/AppSearch/index.html#//apple_ref/doc/uid/TP40016308&quot;&gt;App Search（应用搜索）&lt;/a&gt;：现在，Apple 将会抓取你的网页内容（与 native app 内容）用于 Spotlight 与 Siri 的搜索结果，&lt;a href=&quot;https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/AppSearch/WebContent.html#//apple_ref/doc/uid/TP40016308-CH8&quot;&gt;想知道你的标签都兼容吗？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;你的网站现在可以通过 JavaScript API 访问 iCloud 的用户数据&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;api-&quot;&gt;新的 API 支持&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Performance/timing&quot;&gt;Performance Timing API&lt;/a&gt; 在 iOS 9 得到回归&lt;/li&gt;
+  &lt;li&gt;关于 HTML5 Video，你现在可以在支持 &lt;a href=&quot;https://developer.apple.com/library/prerelease/ios/documentation/WindowsViews/Conceptual/AdoptingMultitaskingOniPad/QuickStartForPictureInPicture.html#//apple_ref/doc/uid/TP40015145-CH14&quot;&gt;Picture in Picture（画中画）&lt;/a&gt;的 iPad 设备上提供这项新功能；你的视频甚至可以在 Safari 关闭后继续播放&lt;/li&gt;
+  &lt;li&gt;更好的 ES6 支持：classes（类）, computed properties（可计算属性）, template literals（模版字符串）等&lt;/li&gt;
+  &lt;li&gt;Backdrop CSS filters（背景滤镜）&lt;/li&gt;
+  &lt;li&gt;CSS @supports 与 CSS Supports JavaScript API&lt;/li&gt;
+  &lt;li&gt;CSS Level4 伪选择器&lt;/li&gt;
+  &lt;li&gt;用于支持分页内容的 CSS Scroll Snapping&lt;/li&gt;
+  &lt;li&gt;WKWebView 现在可以访问本地文件了&lt;/li&gt;
+  &lt;li&gt;我们仍然需要等待 Push Notification，camera access，Service Workers 这些现代 web API 的到来&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id=&quot;section-2&quot;&gt;新的操作系统&lt;/h6&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;新一代 Apple TV 的 &lt;strong&gt;tvOS&lt;/strong&gt;： 没有浏览器，也没有 webview。但是 JavaScript、XHR 和 DOM 可以通过一个叫做 TVML 的标记语言来使用&lt;/li&gt;
+  &lt;li&gt;Apple Watch 的 &lt;strong&gt;watchOS&lt;/strong&gt;：完全没有任何浏览器和 webview&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;再注！&lt;/strong&gt; 由于原文写于 Apple 发布会之前，为了不让读者感到奇怪，笔者将会对文章进行适当改写与补充，以保证本文的连贯性&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;ios-&quot;&gt;新的 iOS 设备特性&lt;/h3&gt;
+
+&lt;h5 id=&quot;iphones-6s--3d-touch&quot;&gt;iPhones 6s 与 3D Touch&lt;/h5&gt;
+
+&lt;p&gt;从 web 设计与开发的角度来说，新的 iPhone 6s 与 6s Plus 与之前的版本并没有太多差别。不过，有一个特性注定会吸引我们的目光：&lt;strong&gt;3D Touch&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我们无法确定 Apple 是不是只是重命名了一下 “Force Touch”（用于 Apple Watch、TrackPad 2 与最新的 MacBook 上）或者 3D Touch 的确是一个为 iPhone 定制的似曾相识却不同的东西。3D Touch 允许操作系统和应用侦测每一个手指与屏幕接触时的压力。从用户体验的角度来说，最大的变化莫过于当你用点力去触碰或者拖拽屏幕时，操作系统将会触发诸如 peek，pop 这些新机制。那么问题来了：&lt;strong&gt;我们是否能够在网站中使用这个新玩意呢？让我们一点点来看：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;iOS 9 搭载的 Safari 包含了一些用于 “Force Touch” 的新 API，但它们其实并不是那个用于 iPhone 6s 3D Touch 的 API。你可以理解为这些 API 就是 MacBook 版 Safari 里为 Force Touch 准备的那些 API ，因为共享一套 codebase，所以它理所当然得存在了 iOS 版里而已。&lt;/p&gt;
+
+&lt;p&gt;Force Touch API 为我们添加了两个新东西：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;你的 click 事件处理函数将会从 MouseEvent 中收到一个新的属性：&lt;code class=&quot;highlighter-rouge&quot;&gt;webkitForce&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;DOM 也新增了四个事件：&lt;code class=&quot;highlighter-rouge&quot;&gt;(webkit)mouseforcewillbegin&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;mouseforcedown&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;mouseforceup&lt;/code&gt; 与 &lt;code class=&quot;highlighter-rouge&quot;&gt;mouseforcechange&lt;/code&gt;。下边的示意图将告诉你这些事件是在何时被触发的：&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/foceevents.png&quot; alt=&quot;Force Events&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;相信你已经从它们的名字中意识到了，这些事件都是基于鼠标而非触摸的，毕竟它们是为 MacBook 设计的。并且，TouchEvent 也并没有包含 &lt;code class=&quot;highlighter-rouge&quot;&gt;webkitForce&lt;/code&gt; 这个属性，它仅仅存在于 MouseEvent 里。在 iOS Safari 里，你确实可以找到 &lt;code class=&quot;highlighter-rouge&quot;&gt;onwebkitmouseforce&lt;/code&gt; 这一系列事件处理器，但是很可惜它们并不会被触发，click 返回的 MouseEvent 也永远只能得到一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;webkitForce: 0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;可喜可贺的是，故事还没有结束。&lt;a href=&quot;https://w3c.github.io/touch-events/&quot;&gt;Touch Events v2 draft spec（触摸事件第二版草案）&lt;/a&gt; 中正式添加了 &lt;code class=&quot;highlighter-rouge&quot;&gt;force&lt;/code&gt; 属性。3D Touch 也得以在 iPhone 6s 与 6s+ 中通过 TouchEvent 访问到。不过，笔者也要在这里提醒大家，由于没有 &lt;code class=&quot;highlighter-rouge&quot;&gt;webkitmouseforcechange&lt;/code&gt; 这样给力的事件，在手机上我们只能通过 &lt;strong&gt;轮询 TouchEvent 的做法&lt;/strong&gt; 来不断检测压力值的改变……非常坑爹&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/fr3ino&quot;&gt;@Marcel Freinbichler&lt;/a&gt; 第一个在 Twitter 上晒出了自己的 &lt;a href=&quot;http://freinbichler.me/apps/3dtouch&quot;&gt;Demo&lt;/a&gt;。在 6s 或 new Macbook 的 Safari（目前仅 Safari 支持）上访问就可以看到圆圈会随着压力放大。墙内的小伙伴可以直接试试下面这个圆圈，体验下 3D/Force Touch 带来的的奇妙体验。&lt;/p&gt;
+
+&lt;iframe src=&quot;http://huangxuan.me/forcify/&quot; style=&quot;
+    width:100%;
+    height:500px;
+    border: 0;
+&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;如果你不巧在用不支持 3D/Force Touch 的设备，发现尼玛用力按下去之后居然圆圈也有反映！？&lt;/p&gt;
+
+&lt;p&gt;放心，这真的不是你的设备突然习得了“感应压力”这项技能，而是因为 &lt;a href=&quot;http://huangxuan.me/forcify&quot;&gt;Forcify&lt;/a&gt; 是一个用于在所有设备上 polyfill 3D/Force Touch API 的 JS 库……它不但封装了 OSX/iOS 两个平台之间 API 的差异，还使用”长按”来模拟了 &lt;code class=&quot;highlighter-rouge&quot;&gt;force&lt;/code&gt; 值的变化……&lt;/p&gt;
+
+&lt;h5 id=&quot;ipad-pro&quot;&gt;iPad Pro&lt;/h5&gt;
+
+&lt;p&gt;全新的 iPad Pro（12.9 寸）打破了以往 iPad 渲染网站的方式。在此之前，市面上所有的 iPad（从初代 iPad，到 iPad Air 4，到 iPad Mini）都是以 768px 的宽度提供 viewport。&lt;/p&gt;
+
+&lt;p&gt;而屏幕更大的 iPad Pro 选择了宽 1024px 的 viewport，这使得它天生就能容纳更多的内容。不少人说iPad Pro 就是抄 Microsft Surface Pro 的嘛……嗯哼，IE/Edge 在 Surface Pro 上就是以 1024px 作为视口宽度的……&lt;/p&gt;
+
+&lt;p&gt;从交互的角度上来说，iPad Pro 虽然不支持 3D Touch，但是可以搭配 Smart Keyboard 与/或 Apple Pen（带有压力侦测）使用。对于键盘其实并没有什么好说的，如果一个网站在搭配键盘的桌面电脑上好用，它在 iPad Pro 上应该也不赖。而对于 Apple Pen，很可惜，目前似乎并没有 API 能让你在网站上获得这根笔的压力与角度。&lt;/p&gt;
+
+&lt;h3 id=&quot;ios--1&quot;&gt;新的 iOS 操作系统特性&lt;/h3&gt;
+
+&lt;h5 id=&quot;ipad-&quot;&gt;iPad 上的多任务处理&lt;/h5&gt;
+
+&lt;p&gt;自 iOS 9 起，iPad 允许两个应用在同一时刻并肩执行，有三种方式：&lt;strong&gt;Slide Over&lt;/strong&gt;，&lt;strong&gt;Split View&lt;/strong&gt; 与 &lt;strong&gt;Picture-in-Picture&lt;/strong&gt;。不过，每一种方式都有其硬件需求，比如说 Slide Over 需要 iPad Air, iPad Mini 2 以上的设备，而 Split View 由于对内存的要求目前只支持 iPad Air 2 与 iPad Pro。&lt;/p&gt;
+
+&lt;h6 id=&quot;slide-over&quot;&gt;Slide Over（滑过来！）&lt;/h6&gt;
+
+&lt;p&gt;Slide Over 支持的 App 并不多，不过 Safari 名列其中，这意味着我们的网站将可能在这个模式下被渲染。当网站处于 Slide Over 模式下时，它将在屏幕的右 1/4 位置渲染，并且置于其他 native app 之上。&lt;/p&gt;
+
+&lt;p&gt;这个模式也为 Responsive Web Design（响应式网站设计）提出了新的挑战：&lt;strong&gt;一个只为 iPad 优化的网站，也需要能在该设备上以无需手动刷新的形式支持小屏幕的渲染。&lt;/strong&gt;因此，如果你正在使用服务器端探测（RESS），那么你的 iPad 版本需要以某种方式包含手机版本的网站，或者在进入该模式后重新加载一次。（如果你不了解 RESS，你可以观看我的&lt;a href=&quot;/2014/11/20/responsive-web-design/&quot;&gt;另一篇博文&lt;/a&gt;）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/slideover.png&quot; alt=&quot;Slide Over&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在这个模式下，无论横屏还是竖屏，所有的 iPad（包括 Pro）都会把你的网站以 320px 的 viewport 宽度进行渲染，就好像在一个大 iPhone 5 上一样。你可以在 CSS 中通过 media query（媒体查询）探测到这个模式：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+/* iPad Air or iPad Mini */
+(device-width: 768px) and (width: 320px)
+/* iPad Pro */
+(device-width: 1024px) and (width: 320px)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h6 id=&quot;split-view&quot;&gt;Split View（分屏视图）&lt;/h6&gt;
+
+&lt;p&gt;在较新版本的 iPad 上，你可以将 Slide Over 的 Side View（侧视图）升级为 Split View。此时，两个应用将以相同比例在你的屏幕上同时工作。&lt;/p&gt;
+
+&lt;p&gt;在这个模式下，我们的网站将可能……&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;以屏幕 1/3 比例渲染时&lt;/strong&gt;，viewport 在 iPad Air/mini 犹如 iPhone 5，宽 320px。而在 iPad Pro 上则像是 iPhone 6：宽 375px&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;以屏幕 1/2 比例渲染时&lt;/strong&gt;，viewport 在 iPad Air/mini 上呈现为 507px 宽，而在 iPad Pro（横屏）下呈现为 678px 宽&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;以屏幕 2/3 比例渲染时&lt;/strong&gt;，viewport 在 iPad Air/mini 上呈现为 694px 宽，而在 iPad Pro（横屏）下呈现为 981px 宽&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/splitview.png&quot; alt=&quot;Split View&quot; /&gt;&lt;/p&gt;
+
+&lt;h6 id=&quot;picture-in-picture&quot;&gt;Picture in Picture（画中画）&lt;/h6&gt;
+
+&lt;p&gt;在一些较新版本的 iPad 上，使用 HTML5 video 标签的网站可以将其暴露到 Picture in Picture 机制中。通过 API（本文稍后会讲）或用户的触发，视频可以独立于网站在其他应用的上方继续播放。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/pip.png&quot; alt=&quot;Picture in Picture&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;ios-9-&quot;&gt;iOS 9 下的响应式网页设计&lt;/h5&gt;
+
+&lt;p&gt;下图向你展示了 iOS 9 所有可能的 viewport 尺寸，检查检查你的响应式断点都包含它们了吗？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/ios9rwd.png&quot; alt=&quot;iOS 9 RWD&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;safari-view-controller&quot;&gt;Safari View Controller&lt;/h5&gt;
+
+&lt;p&gt;如果你用过 Twitter 或者 Facebook（或者微信，微博……），那么你一定知道很多 native app 在打开一个网页链接时并不会默认使用 Safari。它们试图让你留在它们的应用里，所以通过提供 webview 让你在应用内进行网页浏览。可是问题在于，这类 webview 并不会与浏览器共享 cookies，sessions，autofill（自动填充）与 bookmark（书签），为了解决这些问题，就有了 Safari View Controller。&lt;/p&gt;
+
+&lt;p&gt;现在，native app 可以使用 Safari View Controller 来打开网站，它提供与 Safari 完全一致的隐私政策、local storage，cookies、sessions 同时让用户留在你的 app 中，它通过一个 “Done”（完成）按钮使用户可以回到 native app 的上一个 controller。这个全新的 controller 还可以让我们在 Share（分享）按钮上添加自定义的操作，这些操作在用户使用 Safari 应用时并不会出现。同时，native app 对这个自定义 Safari 实例具有完全的内容控制，你可以屏蔽不想被渲染的内容。&lt;/p&gt;
+
+&lt;p&gt;当你需要基于 web 的鉴权，比如 OAuth 时，使用 Safari View Controller 同样是一个好主意，这样就不再需要打开浏览器再重定向回你的应用。不过注意了，Safari View Controller 只适用于在线、公开的 web 内容。如果你的 web 内容假设在本地或者私服，那么 WKWebView 仍然是最推荐的选择。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;笔者八卦一下，Safari View Controller 实际上也算是半个社区推进的产物。早在 2014 年 12 月，Tumblr 的 iOS 工程师 Bryan 就发表了一篇著名的 &lt;a href=&quot;http://bryan.io/post/104845880796/we-need-a-safari-view-controller&quot;&gt;We need a “Safari view controller”&lt;/a&gt; 叙述现有 webview 在第三方登录鉴权时的窘境。
+2015 年 6 月，Apple Safari 工程师 Ricky Mondello 的 Twitter 宣告了这个设想的落地：You all asked for it. Come see me introduce it. Introducing Safari View Controller 1:30 PM, Tuesday. Nob Hill.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;safari-content-blockers&quot;&gt;Safari Content Blockers&lt;/h5&gt;
+
+&lt;p&gt;现在，iOS 9 上的 Safari 支持一种全新的 App Extensions（应用拓展）：&lt;strong&gt;Content Blocker&lt;/strong&gt;（内容拦截器）。这类拓展以 native app 的形式存在，你可以在 App Store 上下载到，它们可以拦截 Safari 内的任何内容，包括：跟踪器、广告、自定义字体、大图片、JavaScript 文件等等。&lt;/p&gt;
+
+&lt;p&gt;作为 web 开发者，尽管我们不能禁用 Content Blocker，我们仍然应该注意到它们的存在。诸如 Crystal 的一些拦截器宣称他们&lt;a href=&quot;http://murphyapps.co/blog/2015/8/22/crystal-benchmarks&quot;&gt;可以提高网页的打开速度&lt;/a&gt;。Crystal 声称可以加快网页的加载速度 3.9 倍并且少用 53% 的带宽。不过问题是：到底哪些东西被拦截器拦截了？&lt;a href=&quot;http://thenextweb.com/apple/2015/08/27/content-blocking-in-ios-9-is-going-to-screw-up-way-more-than-just-ads/&quot;&gt;这篇文章&lt;/a&gt;提到了一些我们未来可能会遇到的问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/crystal.png&quot; alt=&quot;crystal&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在 iOS 9 发布后，Peace，一个 Content Blocker，曾在 App Store 排名跻身前十。从用户的角度来说，如果一个网站由于被 Content Blocker 拦截了某些重要资源而不能正常工作，你可以长按重新加载按钮并且以不启用 Content Blocker 的方式重新加载这个网站（见下图，来自 MacWorld.com）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/macworld.png&quot; alt=&quot;disable content blocker&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Content Blocker 能隐藏元素，也有能力通过 CSS 选择器、域名、类型、或者 URL 来过滤并拦截某个文件的加载，&lt;a href=&quot;https://itunes.apple.com/us/app/purify-blocker-fast-clutter/id1030156203?ls=1&amp;amp;mt=8&quot;&gt;Purify Blocker&lt;/a&gt; 给用户提供了拦截某一种内容类型的进阶选项，比如 Web Fonts。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/purify.png&quot; alt=&quot;purify&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;wkwebview-&quot;&gt;WKWebView 的增强&lt;/h5&gt;
+
+&lt;p&gt;UIWebView 已经被官方弃用，虽然它还在在那，不过它再也不会得到什么升级。与此相反，WKWebView 正在取代它的位置。一个最受期待的特性现在终于推出：加载本地文件到 WKWebView。因此，现在 Apache Cordova 应用与其他 web 内容都可以直接从 iOS 包中使用本地文件了，不再需要各种诡异的 hack 了。&lt;/p&gt;
+
+&lt;p&gt;此外，还有一些新特性也一并推出。比如说，通过 WKWebsiteDataStore，Objective-C 或 Swift 有能力查询与管理 webview 的本地存储（比如 localStorage 或 IndexedDB）。这就允许我们将原有的数据存储替换成新的某些东西，比如说替换成一个不永久的（Chrome for iOS 的隐身模式就需要这种东西）&lt;/p&gt;
+
+&lt;h5 id=&quot;universal-links&quot;&gt;Universal Links（通用链接）&lt;/h5&gt;
+
+&lt;p&gt;如果你既有一个网站，又有一个 native app，你现在可以通过 Universal Links 来增强用户体验。它允许你在操作系统内“占有”自己的域名，这样，一切指向你网站的链接都会被重定向到你的 app。&lt;/p&gt;
+
+&lt;p&gt;目前，所有的 app 都是通过自定义 URI 来达到这个效果的，比如 &lt;code class=&quot;highlighter-rouge&quot;&gt;comgooglemaps://&lt;/code&gt; 就可以用来从网站或者其他原生 iOS 应用中打开 Google Maps。&lt;/p&gt;
+
+&lt;p&gt;想要提供这个特性的话，你首先需要在 native app 中实现 Deep Linking（深度链接），让应用中的内容与 Safari 的 URL 吻合。然后，你需要在 Apple 的网站上关联你的域名，取得这个域名的 SSL 认证并且把签名后的 JSON 部署到该域名上。这是为了防止第三方的应用“占据”了属于你而不属于他们的域名，比如说 twitter.com 被非 Twitter 的其他应用占据掉。&lt;/p&gt;
+
+&lt;p&gt;目前唯一的缺点是用户好像并不能决定到底以哪种方式来打开内容（使用 web 还是 app），不过我们可以观望一段时间看看它会如何发展。在不远的这段时间里，你可能会发现在网站或 Google 搜索里点击一个链接时会没有任何预警的就跳进了 native app 里。&lt;/p&gt;
+
+&lt;h5 id=&quot;app-search&quot;&gt;App Search（应用搜索）&lt;/h5&gt;
+
+&lt;p&gt;Apple 带着自己的 web 蜘蛛杀进了搜索的市场，而我们需要支持它得以在 Siri 与 Spotlight 中提升自己的曝光率。这在我们同时拥有网站与 app 时尤为重要，因为现在 Apple 会索引你网站的内容，但打开时却可能将用户带到了 app 里去。&lt;/p&gt;
+
+&lt;p&gt;尽管这会开启 SEO 的新篇章，不过却相当容易。你需要使用一些标签标准，诸如 &lt;a href=&quot;http://schema.org/&quot;&gt;Web Schema&lt;/a&gt;、&lt;a href=&quot;http://applinks.org&quot;&gt;AppLinks&lt;/a&gt;、&lt;a href=&quot;http://ogp.me&quot;&gt;OpenGraph&lt;/a&gt; 或者 &lt;a href=&quot;https://dev.twitter.com/cards/mobile&quot;&gt;Twitter Cards&lt;/a&gt;，配合上 App Banner 与 &lt;code class=&quot;highlighter-rouge&quot;&gt;app-argument&lt;/code&gt;，如果你有你自己的 native app 的话。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;关于“让你的网页支持 Apple 搜索”的更多详情，请查阅 Apple 官方文档 &lt;a href=&quot;https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/AppSearch/WebContent.html#//apple_ref/doc/uid/TP40016308-CH8-SW5&quot;&gt;Mark Up Web Content&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Apple 刚刚发布了一个 &lt;a href=&quot;https://search.developer.apple.com/appsearch-validation-tool/&quot;&gt;App Search Validation Tool（应用搜索验证工具）&lt;/a&gt;来帮助你搞清楚，需要向你的网站添加什么才能支持 App Search&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/appsearch-1024x467.png&quot; alt=&quot;App Search&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;cloudkit-js&quot;&gt;CloudKit JS&lt;/h5&gt;
+
+&lt;p&gt;如果你拥有一个 native app，你很可能会将用户数据保存在 iCloud 上。在过去，只有 iOS 与 Mac 应用被允许使用它。现在，通过 CloudKit JS，你的网站也可以连接上 iCloud 数据了。&lt;/p&gt;
+
+&lt;h5 id=&quot;back-button&quot;&gt;Back Button&lt;/h5&gt;
+
+&lt;p&gt;现在，当你链接到一个 native app 时（通过自定义 URI 或者 Universal Link），Safari 会询问用户是否想要使用 native app 打开这个链接（见下图）。如果用户同意了，这个应用将被打开，并且在左上角会有一个返回按钮可以返回 Safari ，返回到你的网站。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/back.png&quot; alt=&quot;backbutton&quot; width=&quot;320&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;api--1&quot;&gt;新的 API 支持&lt;/h3&gt;
+
+&lt;h5 id=&quot;navigation-timing-api&quot;&gt;Navigation Timing API&lt;/h5&gt;
+
+&lt;p&gt;Navigation Timing API 在 iOS 9 迎来了回归。让我们回忆一下，这货添加于 8.0 却在一周后的 8.1 中去掉了。这对于 Web 性能是个好消息。通过这个 API，我们可以更精确的测量时间，还可以获得一系列有关加载过程的时间戳，它们对于追踪与在真实场景中做决策来改进用户体验都非常有用。&lt;/p&gt;
+
+&lt;h5 id=&quot;picture-in-picture-1&quot;&gt;Picture in Picture&lt;/h5&gt;
+
+&lt;p&gt;PiP API（被称为 Presentation Mode API）目前只支持 iOS，它允许我们手动让一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;video&amp;gt;&lt;/code&gt; 元素进入或离开 PiP 模式如果 &lt;code class=&quot;highlighter-rouge&quot;&gt;video.webkitSupportsPresentationMode&lt;/code&gt; 是支持的。&lt;/p&gt;
+
+&lt;p&gt;举个例子，我们可以在内嵌模式与 PiP 模式中切换：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+video.webkitSetPresentationMode(
+    video.webkitPresentationMode === &quot;picture-in-picture&quot; ?
+    &quot;inline&quot; : 
+    &quot;picture-in-picture&quot;
+);
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;我们还可以通过新的 &lt;code class=&quot;highlighter-rouge&quot;&gt;onwebkitpresentationmodechanged&lt;/code&gt; 事件来检测 Presentation Mode（展示模式）的变化。&lt;/p&gt;
+
+&lt;h5 id=&quot;backdrop-css&quot;&gt;Backdrop CSS&lt;/h5&gt;
+
+&lt;p&gt;iOS 7 与最近的 Mac OS 使用 Backdrop filter（背景滤镜）来模糊背景（指 native 开发），而在网站上实现这个却并不容易。&lt;/p&gt;
+
+&lt;p&gt;iOS 9 上的 Safari 现在支持了来自 Filter Effect v2 spec（滤镜特效第二版规范）的 &lt;strong&gt;backdrop-filter&lt;/strong&gt;。比如说，我们可以使用一个半透明的背景并且对其背后的背景使用滤镜：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+header {
+   background-color: rgba(255, 255, 255, 0.4);
+   -webkit-backdrop-filter: blur(5px);
+   backdrop-filter: blur(5px);
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/backdrop.png&quot; alt=&quot;backdrop&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;css-scroll-snapping&quot;&gt;CSS Scroll Snapping&lt;/h5&gt;
+
+&lt;p&gt;在 web 上实现分页内容（比如相册跑马灯）总是非常麻烦，无论是使用 JavaScript 框架、touch 事件还是 hacking 滚动条等等。Apple 新添加了一个很赞的 CSS 特性叫做 CSS Scroll Snapping。这个特性新增了一系列的 CSS 属性让你定义规则或者不规则的 snap zone（停留区域），这样滚动的位置就会“啪”地一下停在这个区域，而非像以前一样可以停在任何地方。&lt;/p&gt;
+
+&lt;p&gt;来看个例子：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+#photo-gallery{
+    width: 100%;
+    overflow-x: scroll;
+    -webkit-scroll-snap-points-x: repeat(100%);
+    -webkit-scroll-snap-type: mandatory;
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;想要看个跑起来后的例子？笔者为大家准备了 webkit 的官方 &lt;a href=&quot;http://www.webkit.org/demos/scroll-snap/&quot;&gt;demo&lt;/a&gt;，不过这个属性目前只支持 iOS 9 Safari 哦，并不支持 webview&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;css-supports&quot;&gt;CSS Supports&lt;/h5&gt;
+
+&lt;p&gt;CSS Supports，包括 CSS &lt;code class=&quot;highlighter-rouge&quot;&gt;@supports&lt;/code&gt; 与来自 CSS Conditional Rules Module Level 3 spec 的 JavaScript CSS Supports API 都在 iOS 上迎来降临。现在，我们可以针对某个 CSS 属性的特定值的支持情况来编写代码：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+@supports(-webkit-scroll-snap-type: mandatory) {
+    /* we use it */
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;同样，使用 JavaScript：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+if (CSS.supports(&quot;-webkit-scroll-snap-type&quot;, &quot;mandatory&quot;)) {}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;section-3&quot;&gt;一些细微的改进&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ECMAScript 6 的更完善支持：classed、computed properties、template literial 与 week sets&lt;/li&gt;
+  &lt;li&gt;新的 CSS Level4 伪类/元素选择器：&lt;code class=&quot;highlighter-rouge&quot;&gt;:not&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;:matches&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;:any-link&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;:placeholder-shown&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;:read-write&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;:read-only&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Native app 现在可以通过 extension 来向 Safari 的 Shared Links（分享链接）窗口上注入信息&lt;/li&gt;
+  &lt;li&gt;大量无前缀 CSS 属性的支持（终于），比如 transition、animation、@keyframes、flex 与 columns&lt;/li&gt;
+  &lt;li&gt;Mac OS El Capitán 上的 Safari 9 提供了一个全新设计的 Web Inspector（Web 检查器）。幸运的是，iOS 9 的远程调试完全兼容 Mac OS 上的 Safari 8，所以你倒是不用急着升级你的 Mac OS&lt;/li&gt;
+  &lt;li&gt;iOS 9 通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;-apple-font&lt;/code&gt; 加入了一些 Dynamic Fonts（动态字体），并且它们现在应用的是 Apple 的新字体：San Francisco，笔者的博客就已经用上它啦&lt;/li&gt;
+  &lt;li&gt;scrollingElement 现在可用了&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input type=file&amp;gt;&lt;/code&gt; 现在允许你从 iCloud Drive 与已安装的第三方应用，比如 Google Drive 中选择文件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.mobilexweb.com/wp-content/uploads/2015/09/IMG_2017.png&quot; alt=&quot;input file&quot; width=&quot;320&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;当你加载一个 HTTPS 协议的页面时，你不能混用 HTTP 与 HTTPS 的资源&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;bugs&quot;&gt;Bugs&lt;/h3&gt;
+
+&lt;p&gt;Bug 通常都要在几周之后才会显露出来，我也会持续跟进并更新这篇文章。目前为止，我的发现如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;对于 Home Screen webapps（添加至主屏的 web 应用），&lt;code class=&quot;highlighter-rouge&quot;&gt;apple-mobile-web-app-status-bar-style&lt;/code&gt; 这个 meta 标签不起作用了！所以你现在不能再像过去一样使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;black-translucent&lt;/code&gt; 让你的 webapp 渲染在状态栏的后面了。（iOS 9.2 fixed 了这个 bug）&lt;/li&gt;
+  &lt;li&gt;Speech Synthesis API （语音综合 API）不再工作了&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;仍在等待……&lt;/h3&gt;
+
+&lt;p&gt;当 Mac 上的 Safari、桌面电脑与 Android 上的 Chrome 都已经为网站支持 Push Notification （通知推送）时，iOS 上的 Safari 仍然不支持这个特性。就 API 而言，我们仍然没有：WebRTC、getUserMedia、Service Worker、FileSystem API、Network Information API、Battery Status API、Vibration API 等等……你又在 iOS 上等待哪些特性呢？&lt;/p&gt;
+
+&lt;h3 id=&quot;watchos--tvos&quot;&gt;watchOS 与 tvOS&lt;/h3&gt;
+
+&lt;p&gt;新发布的 watchOS 2.0 与 tvOS 9.0 都是基于 iOS 的操作系统，它们针对特定的设备发行（Apple Watch 与新的 Apple TV）。从用户的角度来说，那里并没有浏览器了。从开发者的角度，那里也没有 Webview 了。&lt;/p&gt;
+
+&lt;p&gt;尽管有不少人抱怨（大部分都是针对 webview 的缺失），我并不能确定这是不是个坏主意。我猜测 Apple 会尝试通过 Siri 来将 “web” 带给 TV、手表、甚至 CarPlay 的用户。所以，如果你遵循了上述的 “App Search” 的步骤，你的内容将可能通过 Siri 在这些设备上以 widget（小部件）或者快捷回复的形式变得可以访问。&lt;/p&gt;
+
+&lt;p&gt;对于 Apple TV ，它支持使用 JavaScript、DOM API 与 XMLHttpRequest 来让我们构建某种类似 Client-Server webapp 的东西。没有 HTML 和 CSS，这是什么把戏？其实它支持的叫 TVML，是一种基于 XML、为那些可以被渲染在 TV 屏幕上的特定内容而优化后的标签。这些标签只可以在来自应用商店的 native app 中渲染，但是这些 TVML 是由服务器端来生成的。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;著作权声明&lt;/h3&gt;
+
+&lt;p&gt;本文译自 &lt;a href=&quot;http://www.mobilexweb.com/blog/ios9-safari-for-web-developers&quot;&gt;iOS 9, Safari and the Web: 3D Touch, new Responsive Web Design, Native integration and HTML5 APIs — Breaking the Mobile Web&lt;/a&gt; &lt;br /&gt;
+译者 &lt;a href=&quot;http://weibo.com/huxpro&quot;&gt;黄玄&lt;/a&gt;，首次发布于 &lt;a href=&quot;http://huangxuan.me&quot;&gt;Hux Blog&lt;/a&gt;，转载请保留以上链接&lt;/p&gt;
+</description>
+        <pubDate>Tue, 15 Dec 2015 00:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2015/12/15/ios9-safari-web/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2015/12/15/ios9-safari-web/</guid>
+        
+        <category>前端开发</category>
+        
+        <category>JavaScript</category>
+        
+        <category>iOS</category>
+        
+        <category>译文</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>「知乎」设计师如何学习前端？</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;这篇文章转载自&lt;a href=&quot;https://www.zhihu.com/question/21921588/answer/69680480&quot;&gt;我在知乎上的回答&lt;/a&gt;，也被刊登于&lt;a href=&quot;http://www.uisdc.com/head-first-front-end&quot;&gt;优秀网页设计&lt;/a&gt;等多个网站上 ;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div&gt;
+    &lt;br /&gt;笔者的经历在知乎就可以看到，大学专业是数字媒体艺术，大一实习过动效设计师，大二拿到了人生第一个大公司 offer 是阿里的交互设计，后来转岗到淘宝旅行的前端团队，现在在微信电影票做前端研发。
+    &lt;br /&gt;
+    &lt;br /&gt;也是走过了不少野路子，不过还好有小右哥 &lt;a data-hash=&quot;cfdec6226ece879d2571fbc274372e9f&quot; href=&quot;//www.zhihu.com/people/cfdec6226ece879d2571fbc274372e9f&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@尤雨溪&quot; data-tip=&quot;p$b$cfdec6226ece879d2571fbc274372e9f&quot;&gt;@尤雨溪&lt;/a&gt; 这样艺术/设计转前端的大神在前面做典范，也证明这条路是玩的通的 ;)
+    &lt;br /&gt;
+    &lt;br /&gt;接下来就说说自己的学习建议吧，一个小教程，也是自己走过的流程，仅供参考哈
+    &lt;br /&gt;
+    &lt;br /&gt;------------
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;背景篇&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;在这个时代学习新东西，一定要善于使用 Bing/Google 等搜索引擎…网络上的资源非常丰富，自学能力也尤为重要，尤其是对于学习技术！
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;入门篇（HTML/CSS）&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;说起设计师希望学前端的初衷，大概还是因为各种华丽的网页特效/交互太过吸引人，这种感觉大概就是：“Hey，我的设计可以做成网页访问了呢！”
+    &lt;br /&gt;好在，“展示”对于前端技术来说反而是最简单的部分。所以，放下你对“编程”两个字的恐惧，&lt;b&gt;从“称不上是编程语言”的 HTML/CSS 开始，先做点有成就感的东西出来吧！&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;对于设计师来说，最有成就感的一定是“可以看到的东西”，而 HTML/CSS 正是用来干这个的，HTML 就是一堆非常简单的标签，而 CSS 无非就是把你画画的流程用&lt;b&gt;英语&lt;/b&gt;按一定的格式写出来而已：
+    &lt;br /&gt;
+    &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;p&amp;gt; p is paragraph! &amp;lt;/p&amp;gt;
+
+&amp;lt;style&amp;gt;
+p { color: red;}
+&amp;lt;/style&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;是不是非常容易，就跟读英语一样！
+    &lt;br /&gt;接下来，你就需要开始自学啦，比如常用 HTML 标签的意思，各种 CSS 的属性，还有 CSS 的盒模型、优先级、选择器……放心，它们都很容易；能玩得转 PS/AI/Flash/Axure/AE/Sketch 的设计师们，学这个洒洒水啦
+    &lt;br /&gt;
+    &lt;br /&gt;推荐几个资源：
+    &lt;br /&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;//link.zhihu.com/?target=http%3A//www.w3school.com.cn/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;w3school 在线教程&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; (中文，一个很 Low 但是又很好的入门学习网站）
+            &lt;br /&gt;
+        &lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;//link.zhihu.com/?target=http%3A//www.codecademy.com/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;Learn to code&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; (Codecademy，如果你英文 OK，&lt;b&gt;强烈建议&lt;/b&gt;你使用它进行交互式的学习！里面从 HTML/CSS 到搭建网站的课程都有，免费，生动直观）
+            &lt;br /&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;br /&gt;&lt;b&gt;这个阶段的练习主要是“临摹”：用代码画出你想画的网站，越多越好。&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;对于书，我&lt;b&gt;非常不推荐&lt;/b&gt;上来就去看各种厚厚的入门/指南书，没必要！这一个阶段应该快速上手，培养兴趣，培养成就感。先做出可以看的东西再说，掌握常用的 HTML/CSS 就够用了
+    &lt;br /&gt;
+    &lt;br /&gt;如果完成的好，这个阶段过后你大概就可以写出一些简单又好看的“静态网页”了，比如这个作品集/简历：&lt;a href=&quot;//link.zhihu.com/?target=http%3A//huangxuan.me/portfolio/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;Portfolio - 黄玄的博客&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; （好久没更新了…丢人现眼）
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;入门篇（JavaScript/jQuery）&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;想要在网页上实现一些交互效果，比如轮播图、点击按钮后播放动画？那你就必须要开始学习 JavaScript 了！JavaScript 是一门完整、强大并且非常热门的编程语言，你在浏览器里看到的所有交互或者高级功能都是由它在背后支撑的！
+    &lt;br /&gt;
+    &lt;br /&gt;举个小栗子：
+    &lt;br /&gt;
+    &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot;&gt;alert(&quot;Hello World!&quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;就这一行，就可以在浏览器里弹出 Hello World 啦！
+    &lt;br /&gt;
+    &lt;br /&gt;在了解一些基础的 JavaScript 概念（变量、函数、基本类型）后，我们可以直接去学习 jQuery，你不用知道它具体是什么（它是一个 JavaScript 代码库），你只要知道它可以显著地降低你编写交互的难度就好了：
+    &lt;br /&gt;
+
+```
+$(&#39;.className&#39;).click(function(){
+    alert(&quot;Hello jQuery&quot;)
+})
+```
+
+通过 jQuery，我们可以继续使用在 CSS 中学到的“选择器”
+    &lt;br /&gt;
+    &lt;br /&gt;对于没有编程基础的人来说，想要完全掌握它们两并不容易。作为设计师，很多时候我们可以先不必深究它们的原理，而是尝试直接应用它！这样成就感会来得很快，并且你可以通过实际应用更加理解 JavaScript 是用来做什么的。
+    &lt;br /&gt;
+    &lt;br /&gt;我仍然推荐你使用 &lt;a href=&quot;//link.zhihu.com/?target=http%3A//www.w3school.com.cn/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;w3school 在线教程&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; 与 &lt;a href=&quot;//link.zhihu.com/?target=http%3A//www.codecademy.com/&quot; class=&quot; external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;&lt;span class=&quot;invisible&quot;&gt;http://www.&lt;/span&gt;&lt;span class=&quot;visible&quot;&gt;codecademy.com/&lt;/span&gt;&lt;span class=&quot;invisible&quot;&gt;&lt;/span&gt;&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; 进行学习。另外，你可以看一看诸如《&lt;a href=&quot;//link.zhihu.com/?target=http%3A//book.douban.com/subject/10792216/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;锋利的jQuery (豆瓣)&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt;》 这一类非常实用的书籍，可以让你很快上手做出一些简单的效果来！
+    &lt;br /&gt;
+    &lt;br /&gt;如果学习得顺利，你还可以尝试使用各种丰富的 jQuery 插件，你会发现写出支持用户交互的网站也没有那么困难～很多看上去很复杂的功能（比如轮播图、灯箱、下拉菜单），搜一搜然后看看文档（教程）、改改示例代码就好了。
+    &lt;br /&gt;
+    &lt;br /&gt;比如说，配合 &lt;a href=&quot;//link.zhihu.com/?target=https%3A//github.com/Huxpro/jquery.HSlider&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;Huxpro/jquery.HSlider · GitHub&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; 这样的轮播图插件，你可以很轻松的写出 &lt;a href=&quot;//link.zhihu.com/?target=http%3A//huangxuan.me/jquery.HSlider/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;HSlider | Demo&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; 这样的网页相册或者 &lt;a href=&quot;//link.zhihu.com/?target=http%3A//huangxuan.me/jquery.HSlider/demo-weather-app/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;HSlider | Weather&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; 这样的手机端 App 原型～
+    &lt;br /&gt;
+    &lt;br /&gt;最后，我想推荐下 &lt;a href=&quot;//link.zhihu.com/?target=http%3A//getbootstrap.com/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;Bootstrap · The world&#39;s most popular mobile-first and respons&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; ，这是世界上最知名的前端 UI 框架之一，提供了大量 CSS 样式与 jQuery 插件。它非常容易学习并且中英文教程都非常健全，你并不需要理解它背后的工作原理就能很好的使用它，让你快速达到“可以建站的水平”。有余力的话，你不但可以学习如何使用它，还可以学习它背后的设计思想。
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;转职方向一：前端重构 （Web Rebuild）&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;业内通常把专精 HTML/CSS 的前端从业人员称为重构，而对于注重视觉效果的设计师来说，在掌握基本的 HTML/CSS 后，就可以朝着这个方向发展了。
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;到了这个阶段，你不但要知道怎么写页面，还要知道它们都是为什么，并且知道怎么做更好。这对你理解 Web 世界非常有帮助，并且能帮助你做出更“系统化”的设计。&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;CSS 的学问很多，你需要开始理解文档流、浮动流等各种定位的方式与原理，理解 CSS 的继承复用思想、理解浏览器的差异、兼容、优雅降级……这里强烈推荐一本书：《&lt;a href=&quot;//link.zhihu.com/?target=http%3A//book.douban.com/subject/4736167/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;精通CSS（第2版） (豆瓣)&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt;》，虽然前端技术突飞猛进，但这本书的思想永远不会过时。
+    &lt;br /&gt;
+    &lt;br /&gt;HTML 方面，要开始注重语义化、可访问性与结构的合理，你要开始学习“结构与样式的分离”，这里有一本神书将这种分离做到了极致：《&lt;a href=&quot;//link.zhihu.com/?target=http%3A//book.douban.com/subject/2052176/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;CSS禅意花园 (豆瓣)&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt;》
+    &lt;br /&gt;
+    &lt;br /&gt;另外，各种炫酷屌的 CSS 3 属性你一定会喜欢：你可以用媒体查询做响应式网页设计，你可以用 transiton 和 animation 做补间动画与关键帧动画，用 transform 做缩放、旋转、3D变换，还有圆角、渐变、阴影、弹性盒！样样都是设计师的神器！
+    &lt;br /&gt;
+    &lt;br /&gt;如果你还掌握了 &lt;b&gt;入门篇（JavaScript/jQuery）&lt;/b&gt;的知识，那么&lt;b&gt;恭喜你！你已经可以做出很多有趣的网页了！&lt;/b&gt;很多 minisite 或者微信上的“H5” 小广告，这个程度的你已经可以轻松完成了！
+    &lt;br /&gt;
+    &lt;br /&gt;配合上你的设计功力，你可以开始尝试创作一些好玩的东西，比如这种富含交互和动画的网站 &lt;a href=&quot;//link.zhihu.com/?target=http%3A//huangxuan.me/senova/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;绅宝 SENOVA&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; ，它仍然是基于 &lt;a href=&quot;//link.zhihu.com/?target=https%3A//github.com/Huxpro/jquery.HSlider&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;Huxpro/jquery.HSlider · GitHub&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; 实现的！或者给自己做个小小的个人网站试试
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;转职方向二：前端工程师（Front-end Engineer）&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;如果你觉得上述的这些都还满足不了你，你渴望做出更多了不起的交互，甚至你已经喜欢上了编程，想要转行做工程师，或者成为一名全栈设计师，那么你可以朝着这个方向继续发展！
+    &lt;br /&gt;
+    &lt;br /&gt;这个阶段的最大难度，是你必须&lt;b&gt;学会像一名软件工程师一样思考&lt;/b&gt;。你需要踏踏实实学习编程语言，深入理解作用域、对象、类、封装、继承、面向对象编程、事件侦听、事件冒泡等一大堆编程概念，你还需要了解浏览器，学习 DOM、BOM、CSSOM 的 API，你甚至还需要学习一些网络原理，包括域名、URL、DNS、HTTP 请求都是什么…
+    &lt;br /&gt;
+    &lt;br /&gt;你可能会被这一大堆名词吓到。确实，想要搞定他们并不容易。但是，你要相信只要你肯花功夫它们也没有那么难，而更重要的是，如果你能拿下他们，你所收获的并不只是这些而已，而是真正跨过了一道大坎 —— &lt;b&gt;你的世界将因此打开， 你看待世界的方式将因此改变&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;对于这个阶段，你可以继续在 &lt;a href=&quot;//link.zhihu.com/?target=http%3A//www.codecademy.com/&quot; class=&quot; external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;&lt;span class=&quot;invisible&quot;&gt;http://www.&lt;/span&gt;&lt;span class=&quot;visible&quot;&gt;codecademy.com/&lt;/span&gt;&lt;span class=&quot;invisible&quot;&gt;&lt;/span&gt;&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; 上学习，但是 w3school 已经不够用了，遇到不会的语法，我推荐你查阅 &lt;a href=&quot;//link.zhihu.com/?target=https%3A//developer.mozilla.org/zh-CN/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;Mozilla 开发者网络&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt;，这是少数中英文都有的非常专业且友好的网站。
+    &lt;br /&gt;
+    &lt;br /&gt;同时，你可能需要看一些书本来帮助你学习 JavaScript ：
+    &lt;br /&gt;
+    &lt;ul&gt;
+        &lt;li&gt; 《&lt;a href=&quot;//link.zhihu.com/?target=http%3A//book.douban.com/subject/10546125/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;JavaScript高级程序设计（第3版） (豆瓣)&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; 》或 《&lt;a href=&quot;//link.zhihu.com/?target=http%3A//book.douban.com/subject/2228378/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;JavaScript权威指南 (豆瓣)&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt;》，大而全的书只需要一本就够了&lt;/li&gt;
+        &lt;li&gt;如果上面这本你觉得太难，你可以先看 《&lt;a href=&quot;//link.zhihu.com/?target=http%3A//book.douban.com/subject/6038371/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;JavaScript DOM编程艺术 （第2版） (豆瓣)&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt;》来过渡一下，这本书比较容易，它会教给你 “优雅降级、渐进增强”的优秀思想&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;br /&gt;如果你能顺利得渡过了这个阶段，我想你已经能做出很多令你自豪的网站了！试着向身边的工程师朋友询问如何购买域名、配置简单的静态服务器，或者搜搜“Github Pages”，然后把你的作品挂在网络上让大家欣赏吧！
+    &lt;br /&gt;
+    &lt;br /&gt;你还可以试着用 JavaScript 写写小游戏，这不但能锻炼你的编程水平还非常有趣～比如这是我刚学 JS 不久后 hack 一晚的产物 —— 用 DOM 实现的打飞机：&lt;a href=&quot;//link.zhihu.com/?target=http%3A//huangxuan.me/aircraft&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;Hux - Aircraft&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt; （不支持手机）
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;入行篇&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;如果你能完成上述所有的学习，你已经是一名非常出色的前端学徒了！对于只是想要丰富技能的设计师或者产品经理来说，接下来的内容可能会让你感到不适 ;(
+    &lt;br /&gt;但如果你铁了心想要真正入行进入大公司从事专职前端开发的工作，那么你可以接着往下看：
+    &lt;br /&gt;
+    &lt;br /&gt;近几年的前端技术发展迅猛，前端工程师早已不是切切图写写页面做点特效就完事的职位，你需要具备相当完善的工程师素质与计算机知识，成为一名真正的工程师。
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要非常了解 JavaScript 这门语言&lt;/b&gt;，包括 闭包、IIFE、this、prototype 及一些底层实现（ES、VO、AO）、熟悉常用的设计模式与 JavaScript 范式（比如实现类与私有属性）。另外，新的 ES6 已经问世，包括 class, module, arrow function 等等
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要非常了解前端常用的网络及后端知识&lt;/b&gt;，包括 Ajax、JSON、HTTP 请求、GET/POST 差异、RESTful、URL hash/query、webSocket、常用的跨域方式（JSONP/CORS、HTTP 强缓存/协商缓存，以及如何利用 CDN 、静态网站/动态网站区别、服务器端渲染/前端渲染区别等等
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要学习使用进阶的 CSS&lt;/b&gt;，包括熟悉 CSS 3，使用 Scss/Less 等编译到 CSS 的语言，使用 autoprefixer 等 PostCSS 工具，了解 CSS 在 Scope/Namespace 上的缺陷，你还可以学习 CSS Modules、CSS in JS 这些有趣的新玩意
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要非常了解前端的模块化规范&lt;/b&gt;，可能在你学习到这里的时候，Require.js/AMD 已经再见了，但是 CommonJS 与 ES6 Modules 你必须要了解。（你可以观看我的分享《&lt;a href=&quot;//link.zhihu.com/?target=http%3A//huangxuan.me/js-module-7day/%23/&quot; class=&quot; wrap external&quot; target=&quot;_blank&quot; rel=&quot;nofollow noreferrer&quot;&gt;JavaScript Modularization Seven Day&lt;i class=&quot;icon-external&quot;&gt;&lt;/i&gt;&lt;/a&gt;》 来学习 JS 模块化的历史）
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要熟悉 Git 与 Shell 的使用&lt;/b&gt;，包括基于 git 的版本管理、分支管理与团队协作，包括简单的 Linux/Unix 命令、你要知道大部分程序员的工作可以通过 shell 更快更酷的完成，并且很多“软件”只能通过 shell 来使用。你还可以把你的代码放到 github 上与人分享，并且学习 github 上其他优秀的开源代码
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要熟悉并且习惯使用 Node&lt;/b&gt;，包括了解 npm、使用 Grunt/Gulp/Browserify/Webpack 优化你的工作流、对你的代码进行打包、混淆、压缩、发布，你还可以使用 Express/Koa 配合 MongoDB/Redis 涉足到后端领域，或者尝试用 Node 做后端渲染优化你的首屏体验
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要了解各种 HTML 5 的新 API&lt;/b&gt;，包括 &amp;lt;video&amp;gt;/&amp;lt;audio&amp;gt;，包括 Canvas，webGL、File API、App Cache、localStorage、IndexedDB、Drag &amp;amp; Drop、更高级的 DOM API、Fetch API 等等
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要学习 JavaScript 的单线程与异步编程方法&lt;/b&gt;，因为它们非常非常常用、包括 setTimeout/setInterval，回调与回调地狱、事件与event loop、还有 Promise 甚至 Async/Await
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要非常了解浏览器&lt;/b&gt;，包括主流浏览器的名称、内核与差异、包括私有属性与 -webkit- 等厂商前缀，你需要学习如何使用 Chrome DevTool，你需要了解浏览器渲染的 reflow/repaint 来避免 Jank 并进行有针对性的性能优化
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要专门学习 Mobile Web&lt;/b&gt;，因为移动互联网是趋势。包括 viewport、CSS pixel、 touch 事件、iOS/Android 浏览器的差异与兼容、移动端的性能优化、300ms delay 等等…你还需要知道 Hybrid 是什么，包括 Cordova/Phonegap，更复杂的比如和 iOS/Android 通信的机制，比如 URI Scheme 或者 JS Bridge
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要学习一些&lt;/b&gt;&lt;b&gt;非常火热的前端框架/库&lt;/b&gt;，他们不但能帮助你更快的进行开发、更重要的是他们背后所蕴含的思想。包括 Backbone、Angular、Vue、React、Polymer 等等、了解它们背后的双向数据绑定、单向数据流、MVC/MVVM/Flux 思想、Web Component 与组件化等等
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要学习如何构建 web 单页应用&lt;/b&gt;，这是 web 的未来，包括利用 history API 或者 hash 实现路由，包括基于 Ajax + 模版引擎或者其他技术的前端渲染、包括组织较为复杂的软件设计等等
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;我还建议你学习更多的计算机知识&lt;/b&gt;，它们能对你的代码能起到潜移默化的作用，包括简单的计算机体系结构、更广泛的编程知识（面向对象/函数式等）、栈、堆、数组、队列、哈希表、树、图等数据结构、时间复杂度与空间复杂度以及简单的算法等等
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要了解业内的大神并阅读它们的博客/知乎/微博&lt;/b&gt;，比如 &lt;a data-hash=&quot;cfdec6226ece879d2571fbc274372e9f&quot; href=&quot;//www.zhihu.com/people/cfdec6226ece879d2571fbc274372e9f&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@尤雨溪&quot; data-tip=&quot;p$b$cfdec6226ece879d2571fbc274372e9f&quot;&gt;@尤雨溪&lt;/a&gt;&lt;a data-hash=&quot;3ec3b166992a5a90a1083945d2490d38&quot; href=&quot;//www.zhihu.com/people/3ec3b166992a5a90a1083945d2490d38&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@贺师俊&quot; data-tip=&quot;p$b$3ec3b166992a5a90a1083945d2490d38&quot;&gt;@贺师俊&lt;/a&gt;&lt;a data-hash=&quot;3212f9044005e9306aab1b61e74e7ae6&quot; href=&quot;//www.zhihu.com/people/3212f9044005e9306aab1b61e74e7ae6&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@张云龙&quot; data-tip=&quot;p$b$3212f9044005e9306aab1b61e74e7ae6&quot;&gt;@张云龙&lt;/a&gt;&lt;a data-hash=&quot;c5198d4e9c0145aee04dd53cc6590edd&quot; href=&quot;//www.zhihu.com/people/c5198d4e9c0145aee04dd53cc6590edd&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@徐飞&quot; data-tip=&quot;p$b$c5198d4e9c0145aee04dd53cc6590edd&quot;&gt;@徐飞&lt;/a&gt;&lt;a data-hash=&quot;20fdd386a6e59d178b8fe14e2863cb40&quot; href=&quot;//www.zhihu.com/people/20fdd386a6e59d178b8fe14e2863cb40&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@张克军&quot; data-tip=&quot;p$b$20fdd386a6e59d178b8fe14e2863cb40&quot;&gt;@张克军&lt;/a&gt;&lt;a data-hash=&quot;c11336b8607d86bc9090bed90757a34c&quot; href=&quot;//www.zhihu.com/people/c11336b8607d86bc9090bed90757a34c&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@玉伯&quot; data-tip=&quot;p$b$c11336b8607d86bc9090bed90757a34c&quot;&gt;@玉伯&lt;/a&gt;&lt;a data-hash=&quot;64458d15a75902cd0425732b7b757705&quot; href=&quot;//www.zhihu.com/people/64458d15a75902cd0425732b7b757705&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@拔赤&quot; data-tip=&quot;p$b$64458d15a75902cd0425732b7b757705&quot;&gt;@拔赤&lt;/a&gt;&lt;a data-hash=&quot;0d9b98af12015c94cff646a6fc0773b5&quot; href=&quot;//www.zhihu.com/people/0d9b98af12015c94cff646a6fc0773b5&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@寸志&quot; data-tip=&quot;p$b$0d9b98af12015c94cff646a6fc0773b5&quot;&gt;@寸志&lt;/a&gt;&lt;a data-hash=&quot;790dccce26904cdcd11b0fad3bac37b7&quot; href=&quot;//www.zhihu.com/people/790dccce26904cdcd11b0fad3bac37b7&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@题叶&quot; data-tip=&quot;p$b$790dccce26904cdcd11b0fad3bac37b7&quot;&gt;@题叶&lt;/a&gt;&lt;a data-hash=&quot;85de6407f2219137df29b4249b91cfd5&quot; href=&quot;//www.zhihu.com/people/85de6407f2219137df29b4249b91cfd5&quot; class=&quot;member_mention&quot; data-editable=&quot;true&quot; data-title=&quot;@郭达峰&quot; data-tip=&quot;p$b$85de6407f2219137df29b4249b91cfd5&quot;&gt;@郭达峰&lt;/a&gt; 等等等等，很多思想和新东西只有从他们身上才能学到。我还推荐你多参加技术交流会，多认识一些可以一起学习的小伙伴，你们可以互相交流并且一起成长
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;你需要具备很强的自学能力、对技术有热情并且不断跟进&lt;/b&gt;。因为 JavaScript/前端的社区非常非常活跃，有太多的新东西需要你自己来发现与学习：比如 Universal JavaScript、Isomorphic JavaScript、前端测试、HTML5 页游、WebRTC、WebSocket、CSS 4、SVG、HTTP/2、ES 7、React Native、Babel、TypeScript、Electron 等等等等…
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;虽然一下扯得有点多，但这些确实就是你未来将会遇到的。你并不需要全部掌握它们，但是却多多益善；你也可以专精在某几个方面，这已经足以让你成为非常专业的前端工程师。
+    &lt;br /&gt;
+    &lt;br /&gt;&lt;b&gt;所以，如果你自认为涵盖了上述要求的 40%，欢迎简历发 huangxuan@wepiao.com ，实习/全职皆可～&lt;/b&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;咦，这个结尾怪怪的……
+
+&lt;/div&gt;
+
+</description>
+        <pubDate>Wed, 28 Oct 2015 20:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2015/10/28/how-designer-learn-fe/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2015/10/28/how-designer-learn-fe/</guid>
+        
+        <category>知乎</category>
+        
+        <category>前端开发</category>
+        
+        <category>UX Design</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>ES5, ES6, ES2016, ES.Next: JavaScript 的版本是怎么回事？「译」</title>
+        <description>&lt;p&gt;JavaScript 有着很奇怪的命名史。&lt;/p&gt;
+
+&lt;p&gt;1995 年，它作为网景浏览器（Netscape Navigator）的一部分首次发布，网景给这个新语言命名为 LiveScript。一年后，为了搭上当时媒体热炒 Java 的顺风车，临时改名为了 JavaScript &lt;em&gt;（当然，Java 和 JavaScript 的关系，就和雷锋和雷锋塔一样 —— 并没有什么关系）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-js-version/javascript-java.jpg&quot; alt=&quot;java-javascript&quot; /&gt;
+&lt;small class=&quot;img-hint&quot;&gt;歪果仁的笑话怎么一点都不好笑&lt;/small&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;译者注：&lt;a href=&quot;https://en.wikipedia.org/wiki/JavaScript#History&quot;&gt;wikipedia 的 JavaScript 词条&lt;/a&gt; 更详细的叙述了这段历史&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;1996 年，网景将 JavaScript 提交给 &lt;a href=&quot;http://www.ecma-international.org/&quot;&gt;ECMA International（欧洲计算机制造商协会）&lt;/a&gt; 进行标准化，并最终确定出新的语言标准，它就是 ECMAScript。自此，ECMAScript 成为所有 JavaScript 实现的基础，不过，由于 JavaScript 名字的历史原因和市场原因（很显然 ECMAScript 这个名字并不令人喜欢……），现实中我们只用 ECMAScript 称呼标准，平时都还是使用 JavaScript 来称呼这个语言。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;术语（译者注）：&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;em&gt;标准（Standard）&lt;/em&gt;： 用于定义与其他事物区别的一套规则&lt;/li&gt;
+    &lt;li&gt;&lt;em&gt;实现（Implementation）&lt;/em&gt;： 某个标准的具体实施/真实实践&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;不过，JavaScript 开发者们并不怎么在乎这些，因为在诞生之后的 15 年里，ECMAScript 并没有多少变化，而且现实中的很多实现都已经和标准大相径庭。其实在第一版的 ECMAScript 发布后，很快又跟进发布了两个版本，但是自从 1999 年 ECMAScript 3 发布后，十年内都没有任何改动被成功添加到官方规范里。取而代之的，是各大浏览器厂商们争先进行自己的语言拓展，web 开发者们别无选择只能去尝试并且支持这些 API。即使是在 2009 年 ECMAScript 5 发布之后，仍然用了数年这些新规范才得到了浏览器的广泛支持，可是大部分开发者还是写着 ECMAScript 3 风格的代码，并不觉得有必要去了解这些规范。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;译者注：&lt;a href=&quot;https://en.wikipedia.org/wiki/ECMAScript#4th_Edition_.28abandoned.29&quot;&gt;ECMAScript 第四版草案&lt;/a&gt;由于太过激进而被抛弃，Adobe 的 &lt;a href=&quot;https://en.wikipedia.org/wiki/ActionScript&quot;&gt;ActionScript 3.0&lt;/a&gt; 是 ECMAScript edition 4 的唯一实现（ Flash 差点就统一 Web 了）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;到了 2012 年，事情突然开始有了转变。大家开始推动停止对旧版本 IE 浏览器的支持，用 ECMAScript 5 (ES5) 风格来编写代码也变得更加可行。与此同时，一个新的 ECMAScript 规范也开始启动。到了这时，大家开始逐渐习惯以对 ECMAScript 规范的版本支持程度来形容各种 JavaScript 实现。在正式被指名为 ECMAScript 第 6 版 (ES6) 之前，这个新的标准原本被称为 ES.Harmony（和谐）。2015 年，负责制定 ECMAScript 规范草案的委员会 TC39 决定将定义新标准的制度改为一年一次，这意味着每个新特性一旦被批准就可以添加，而不像以往一样，规范只有在整个草案完成，所有特性都没问题后才能被定稿。因此，ECMAScript 第 6 版在六月份公布之前，又被重命名为了 ECMAScript 2015（ES2015）&lt;/p&gt;
+
+&lt;p&gt;目前，仍然有很多新的 JavaScript 特性或语法正在提议中，包括 &lt;a href=&quot;https://github.com/wycats/javascript-decorators&quot;&gt;decorators（装饰者）&lt;/a&gt;，&lt;a href=&quot;https://github.com/lukehoban/ecmascript-asyncawait&quot;&gt;async-await（async-await 异步编程模型）&lt;/a&gt; 和 &lt;a href=&quot;https://github.com/jeffmo/es-class-properties&quot;&gt;static class properties（静态类属性）&lt;/a&gt;。它们通常被称为 ES7，ES2016 或者 ES.Next 的特性，不过实际上它们只能被称作提案或者说可能性，毕竟 ES2016 的规范还没有完成，有可能全部都会引入，也有可能一个都没有。TC39 把一个提案分为 4 个阶段，你可以在 &lt;a href=&quot;https://babeljs.io/docs/usage/experimental/&quot;&gt;Babel 的官网&lt;/a&gt; 上查看各个提案目前都在哪个阶段了。&lt;/p&gt;
+
+&lt;p&gt;所以，我们该如何使用这一大堆术语呢？下面的列表或许能帮助到你：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;ECMAScript&lt;/strong&gt;：一个由 ECMA International 进行标准化，TC39 委员会进行监督的语言。通常用于指代标准本身。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;JavaScript&lt;/strong&gt;：ECMAScript 标准的各种实现的最常用称呼。这个术语并不局限于某个特定版本的 ECMAScript 规范，并且可能被用于任何不同程度的任意版本的 ECMAScript 的实现。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ECMAScript 5 (ES5)&lt;/strong&gt;：ECMAScript 的第五版修订，于 2009 年完成标准化。这个规范在所有现代浏览器中都相当完全的实现了。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ECMAScript 6 (ES6) / ECMAScript 2015 (ES2015)&lt;/strong&gt;：ECMAScript 的第六版修订，于 2015 年完成标准化。这个标准被部分实现于大部分现代浏览器。可以查阅&lt;a href=&quot;http://kangax.github.io/compat-table/es6/&quot;&gt;这张兼容性表&lt;/a&gt;来查看不同浏览器和工具的实现情况。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ECMAScript 2016&lt;/strong&gt;：预计的第七版 ECMAScript 修订，计划于明年夏季发布。这份规范具体将包含哪些特性还没有最终确定&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ECMAScript Proposals&lt;/strong&gt;：被考虑加入未来版本 ECMAScript 标准的特性与语法提案，他们需要经历五个阶段：Strawman（稻草人），Proposal（提议），Draft（草案），Candidate（候选）以及 Finished （完成）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在这整个 Blog 中，我将把目前的 ECMAScript 版本称作 ES6（因为这是大部分开发者最习以为常的），把明年的规范称作 ES2016（因为，与 ES6/ES2015 不同，这个名字将在整个标准化过程中沿用）并且将那些还没有成为 ECMAScript 定稿或草案的未来语言概念称为 ECMAScript 提案或者 JavaScript 提案。我将尽我所能在任何可能引起困惑的场合沿用这篇文章。&lt;/p&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;一些资源&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TC39 的 &lt;a href=&quot;https://github.com/tc39/ecma262&quot;&gt;Github 仓库&lt;/a&gt;上可以看到所有目前公开的提案&lt;/li&gt;
+  &lt;li&gt;如果你还不熟悉 ES6，Babel 有一个&lt;a href=&quot;https://babeljs.io/docs/learn-es2015/&quot;&gt;很不错的特性概览&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;如果你希望深入 ES6，这里有两本很不错的书： Axel Rauschmayer 的 &lt;a href=&quot;http://exploringjs.com/&quot;&gt;Exploring ES6&lt;/a&gt;和 Nicholas Zakas 的 &lt;a href=&quot;https://leanpub.com/understandinges6&quot;&gt;Understanding ECMAScript 6&lt;/a&gt;。Axel 的博客 &lt;a href=&quot;http://www.2ality.com/&quot;&gt;2ality&lt;/a&gt; 也是很不错的 ES6 资源&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img class=&quot;shadow&quot; width=&quot;320&quot; src=&quot;/img/in-post/post-js-version/keep-calm-and-learn-javascript.png&quot; /&gt;
+&lt;small class=&quot;img-hint&quot;&gt;来学 JavaScript 吧！&lt;/small&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;著作权声明&lt;/h4&gt;
+
+&lt;p&gt;本文译自 &lt;a href=&quot;http://benmccormick.org/2015/09/14/es5-es6-es2016-es-next-whats-going-on-with-javascript-versioning/&quot;&gt;ES5, ES6, ES2016, ES.Next: What’s going on with JavaScript versioning?&lt;/a&gt; &lt;br /&gt;
+译者 &lt;a href=&quot;http://weibo.com/huxpro&quot;&gt;黄玄&lt;/a&gt;，首次发布于 &lt;a href=&quot;http://huangxuan.me&quot;&gt;Hux Blog&lt;/a&gt;，转载请保留以上链接&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 22 Sep 2015 00:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2015/09/22/js-version/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2015/09/22/js-version/</guid>
+        
+        <category>前端开发</category>
+        
+        <category>JavaScript</category>
+        
+        <category>翻译</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>JavaScript 模块化七日谈</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;下滑这里查看更多内容&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;7月9日，我在公司内部进行了名为「JavaScript 模块化七日谈」分享，并将该 Slides 分享到了微博上。出乎意料地，这篇微博先后被 @JS小组 @尤小右 @寸志 等近 200 人转发，阅读达到 10w，获得了还不错的评价。&lt;/p&gt;
+
+&lt;p&gt;于是，我决定将它重新发到我的博客上，并为它专门制作了适用于 Keynote 展示文稿的新布局。它能自动根据屏幕大小/旋转以一定比例填充屏幕，你也可以直接点击下方链接在新页面打开，来获得更好的、沉浸式的全屏体验&lt;/p&gt;
+
+&lt;h3 id=&quot;watch-slides-httphuangxuanmejs-module-7day&quot;&gt;&lt;a href=&quot;http://huangxuan.me/js-module-7day&quot;&gt;Watch Slides →&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://huangxuan.me/js-module-7day/attach/qrcode.png&quot; width=&quot;350&quot; height=&quot;350&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;small class=&quot;img-hint&quot;&gt;你也可以通过扫描二维码在手机上观看&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;这个 Web Slides 开源在&lt;a href=&quot;https://github.com/Huxpro/js-module-7day&quot;&gt;我的 Github 上&lt;/a&gt;，欢迎你帮助我完善这个展示文稿，你可以给我提 issue，可以 fork &amp;amp; pull request。如果它能帮助到你了，希望你还能不吝啬 star 一下这个项目&lt;/p&gt;
+
+&lt;h3 id=&quot;catalog&quot;&gt;Catalog&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;第一日 上古时期 &lt;strong&gt;&lt;em&gt;Module?&lt;/em&gt;&lt;/strong&gt; 从设计模式说起&lt;/li&gt;
+  &lt;li&gt;第二日 石器时代 &lt;strong&gt;&lt;em&gt;Script Loader&lt;/em&gt;&lt;/strong&gt; 只有封装性可不够，我们还需要加载&lt;/li&gt;
+  &lt;li&gt;第三日 蒸汽朋克 &lt;strong&gt;&lt;em&gt;Module Loader&lt;/em&gt;&lt;/strong&gt; 模块化架构的工业革命&lt;/li&gt;
+  &lt;li&gt;第四日 号角吹响 &lt;strong&gt;&lt;em&gt;CommonJS&lt;/em&gt;&lt;/strong&gt; 征服世界的第一步是跳出浏览器&lt;/li&gt;
+  &lt;li&gt;第五日 双塔奇兵 &lt;strong&gt;&lt;em&gt;AMD/CMD&lt;/em&gt;&lt;/strong&gt; 浏览器环境模块化方案&lt;/li&gt;
+  &lt;li&gt;第六日 精灵宝钻 &lt;strong&gt;&lt;em&gt;Browserify/Webpack&lt;/em&gt;&lt;/strong&gt; 大势所趋，去掉这层包裹！&lt;/li&gt;
+  &lt;li&gt;第七日 王者归来 &lt;strong&gt;&lt;em&gt;ES6 Module&lt;/em&gt;&lt;/strong&gt; 最后的战役&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;thanks&quot;&gt;Thanks&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://lab.hakim.se/reveal-js&quot;&gt;Reveal.js&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 09 Jul 2015 00:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2015/07/09/js-module-7day/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2015/07/09/js-module-7day/</guid>
+        
+        <category>前端开发</category>
+        
+        <category>JavaScript</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>聊聊「阿里旅行 · 去啊」—— 行业与战略 </title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;本篇为该系列第一篇 —— 行业与战略，让我们聊聊行业、战略与格局。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;近几年，互联网产品从线上斗到了线下，互联网行业和传统行业的跨界融合屡见不鲜，“渗透传统行业”几乎成为了全行业下一轮创新的标配，新词“互联网+”也应运而生：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;将互联网行业的生产要素，深度融入经济、社会等各个领域，尝试改变一些传统的实体经济行业，创造出新的产品形态、商业模式和生态&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;O2O 领域已经有了非常多成功的案例：从最早的千团大战，到前年打车大战，再到餐饮 O2O……传统行业被撬动的同时，无数新的市场也在被发掘：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;金融： 蚂蚁金服、芝麻信用、京东白条&lt;/li&gt;
+  &lt;li&gt;通信： 微信电话本，阿里通信&lt;/li&gt;
+  &lt;li&gt;交通： 打车、租车、专车&lt;/li&gt;
+  &lt;li&gt;地产： 二手房、租房&lt;/li&gt;
+  &lt;li&gt;医疗、家电、教育、票务……&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;当然，还有我们的在线旅游行业，BAT 纷纷入局，盛况空前。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;正文&lt;/h2&gt;
+
+&lt;p&gt;历史总是现在与未来的明鉴，&lt;strong&gt;垂直领域互联网产品&lt;/strong&gt;更是与行业的历史紧密相连。想要用互联网产品解决传统行业的问题，就得先了解这个行业的发展规律，看看这个行业都经历过怎样的变革。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;传统老大：旅行社&lt;/h3&gt;
+
+&lt;p&gt;旅行社，一个耳熟能详的名字。在互联网的变革到来之前，旅游行业几乎就是旅行社的天下。&lt;/p&gt;
+
+&lt;p&gt;在行业术语里，旅行社被称为 &lt;strong&gt;TA：Travel Agency —— 旅游代理&lt;/strong&gt;。
+旅行社为你提供旅游信息，代理你办航班，定酒店，买门票，办签证，找导游。通过代理你的旅游消费行为，TA 从中获利。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.013.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;ota&quot;&gt;第一轮革命：兴起的电商与 OTA&lt;/h3&gt;
+
+&lt;p&gt;1995 年，中国互联网沸腾元年，北京上海接入 Internet 节点。
+1998 年，中国互联网电商元年，第一笔在线交易产生。
+1999 年，马云的阿里巴巴创办。同年，旅游行业未来的两大巨头，&lt;strong&gt;携程&lt;/strong&gt;、&lt;strong&gt;艺龙&lt;/strong&gt; 双双出世。&lt;/p&gt;
+
+&lt;p&gt;携程、艺龙利用互联网的体验优势，迅速占领了 TA 的市场，它们被称作 &lt;strong&gt;OTA：Online Travel Agency&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.014.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在他们诞生之初，其实都叫 XX旅行网。那为什么不说他们是做网站的，而说他们是做 TA 的呢？&lt;/p&gt;
+
+&lt;p&gt;这叫要引出本文涉及的第一个常见商业模式：&lt;/p&gt;
+
+&lt;h4 id=&quot;agency-&quot;&gt;Agency 模式&lt;/h4&gt;
+
+&lt;p&gt;Agency，即&lt;strong&gt;代理模式&lt;/strong&gt;。通过代理用户的消费行为，代理商就可以靠佣金的方式从中获利。
+举个例子：假设携程旅行网今天给某某酒店拉来了 100 个日间，那么这个酒店就要以 30元/日间 的方式给携程旅行网反多少的红利。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;佣金，说白了，就是中介费。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.016.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;了解了 Agency 模式，我们再回过来看携程、艺龙：
+虽然渠道改成了互联网，但其商业模式还是 TA 的那套玩法，它们其实是在和传统 TA 分同一块蛋糕。
+还是咨询、酒店、机票、旅游团、旅游套餐，只是&lt;strong&gt;你们在线下玩，我去线上玩了&lt;/strong&gt;，我有渠道优势。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;第二轮革命：比价搜索与去哪儿&lt;/h3&gt;
+
+&lt;p&gt;时光飞驰到 2005 年，单纯做线下已经满足不了很多传统 TA 们了，大家纷纷向携程、艺龙学习，进攻线上，转型 OTA 。&lt;/p&gt;
+
+&lt;p&gt;就在这样的格局下，&lt;strong&gt;去哪儿&lt;/strong&gt; 横空出世，一下占据了半壁江山：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.021.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;去哪儿做了一件什么事呢，它把这些 OTA 的数据全都爬过来，做了一个&lt;strong&gt;比价平台&lt;/strong&gt;。这样，用户就可以在去哪儿的网站上看看哪家 OTA 更便宜，然后用户就去消费哪家的服务。&lt;/p&gt;
+
+&lt;p&gt;所谓“比价平台”，本质上说，就是 &lt;strong&gt;Search Engine —— 搜索引擎&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.018.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这个这个玩法一下就厉害了：
+&lt;strong&gt;去哪儿挡在了用户和所有 OTA 之间，OTA 还是做原来的事情，而去哪儿则拿下了用户找 OTA 的过程&lt;/strong&gt;。同是搜索引擎的百度也是如此：百度自己并不生产内容，而是拿下了用户找内容的过程。&lt;/p&gt;
+
+&lt;p&gt;Let’s why search engine awesome：因为用户在互联网的信息海洋上找信息太难了，所以用户必须要靠搜索引擎来解决这个痛点，而搜索引擎自己也就成为了渠道：&lt;/p&gt;
+
+&lt;h4 id=&quot;channel-&quot;&gt;Channel 模式&lt;/h4&gt;
+
+&lt;p&gt;Channel，即&lt;strong&gt;渠道模式&lt;/strong&gt;。通过优化用户的体验路径，在用户和 B 方之前挡了一道，主要对 B 盈利。
+最常见的对 B 盈利方式就是广告：&lt;strong&gt;Pay for Performance&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.019.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;简单看一眼携程和去哪儿的收入占比就可以发现：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;携程主要靠来自酒店、机票的佣金盈利&lt;/li&gt;
+  &lt;li&gt;去哪儿则主要靠 PFP 广告盈利&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.020.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;通过去哪儿的比价平台，小 OTA 开始有机会通过价格战和大 OTA 周旋。去哪儿在给予了小 OTA 机会的同时也造就了自己，这和 2003 年淘宝 C2C 的崛起，颇有异曲同工之意。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;第 2.5 轮革命：尴尬的淘宝旅行&lt;/h3&gt;
+
+&lt;p&gt;为什么说淘宝旅行是 2.5 次革命呢，因为它想革，但没革上。
+为什么没有革上呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;首先是切入时机太晚&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;阿里其实 2010 年就开始做淘宝旅行了，一直划分在淘宝网下，由那时的淘宝北研（淘宝 UED 北京研发）团队负责，这个团队吸纳了大批雅虎中国的精英，技术水平相当高。&lt;br /&gt;
+可是 2010 年才切入这个市场实在是太晚了，携程、去哪儿的口碑和用户习惯早都养成好几年了，没人会去你淘宝上搜航班酒店，你有大入口也没有用。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;二是资源倾斜不足&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;2010 年还没有什么 &lt;strong&gt;互联网+&lt;/strong&gt; 的概念，结合传统行业也还没有现在这么热，淘宝做旅游这事用了多大力气推很难说，反正我是没听过。
+阿里同年的发展重心还是在其电商体系的完善上：&lt;strong&gt;淘宝商城&lt;/strong&gt; 启用独立域名，其 B2C 的模式刚好弥补了淘宝 C2C 的问题，这货就是后来的&lt;strong&gt;天猫&lt;/strong&gt;，我们可以比较一下两者在资源倾斜上的差异：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;BU&lt;/th&gt;
+      &lt;th&gt;2008&lt;/th&gt;
+      &lt;th&gt;2010&lt;/th&gt;
+      &lt;th&gt;2011&lt;/th&gt;
+      &lt;th&gt;2012&lt;/th&gt;
+      &lt;th&gt;2013&lt;/th&gt;
+      &lt;th&gt;2014&lt;/th&gt;
+      &lt;th&gt;2015&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;天猫&lt;/td&gt;
+      &lt;td&gt;淘宝商城&lt;/td&gt;
+      &lt;td&gt;独立域名&lt;/td&gt;
+      &lt;td&gt;分拆&lt;/td&gt;
+      &lt;td&gt;更名天猫&lt;br /&gt;天猫事业部（1/7）&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;去啊&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;淘宝旅行&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;航旅事业部（1/25）&lt;/td&gt;
+      &lt;td&gt;分拆&lt;br /&gt;更名去啊&lt;/td&gt;
+      &lt;td&gt;独立域名&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;三是思路问题&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;淘宝旅行想怎么玩呢，它实际上就是想用淘宝/天猫的思路去做在线旅行，其实背后还是淘宝卖家和天猫卖家，只不过这次的商户换成 OTA 入驻了，然后大家开开心心像卖衣服一样去卖旅行产品。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.023.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;听上去很美，不但利用了阿里系的大量资源，还直接复刻了淘宝/天猫的牛逼模式 —— 平台模式&lt;/p&gt;
+
+&lt;h4 id=&quot;platform-&quot;&gt;Platform 模式&lt;/h4&gt;
+
+&lt;p&gt;Platform，即&lt;strong&gt;平台模式&lt;/strong&gt;，可以说是当今最叼的商业模式了，它相当于构建了一个完整的生态、市场环境，在这里整合买卖双方的资源。通过维护市场秩序、制定市场规则，让市场活跃，从而赚取场子费。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.026.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;想想看，每一笔交易都在你的地盘上发生，只要市场一直活跃，你就可以在其中&lt;strong&gt;双边、多边盈利&lt;/strong&gt;。什么竞价排名、广告平台、VIP 特权，盈利模式太丰富了&lt;/p&gt;
+
+&lt;p&gt;美梦做完了，回到淘宝旅行来。做平台是每个产品的梦想，肯定是对的。那么问题出在哪呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;太不垂直了！&lt;/strong&gt; 旅游行业，极度要求信誉：去哪儿对接的都是 B 类商家（OTA，品牌连锁酒店，直销等），从根本上就保证了产品体验。淘宝旅行的产品则充斥着大量的小旅行社、个人之类的小卖家，严重影响购买体验。你能想象预定一间酒店发现下面十几二十页的卖家，选完卖家又要跟人在旺旺上扯半个小时么？价格便宜作为唯一的优势，是以严重牺牲产品购买体验为代价的，极为得不偿失。更何况，旅游产品的受众大部分还是消费能力较强的人群，更是看重商家/产品质量而不是价格了。&lt;/p&gt;
+
+&lt;h3 id=&quot;now&quot;&gt;第三轮革命：Now&lt;/h3&gt;
+
+&lt;p&gt;OK，经过这么一番折腾，第三次变革就来了。
+BAT 纷纷介入，行业进入了传说中的 BATX 格局：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.028.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;阿里最近动作频频，力推去啊不说，更是收购线下酒店软件石基，配合蚂蚁金服期下芝麻信用开展“酒店信用住”等业务
+百度早早投资去哪儿，两个搜索引擎起家的公司风格一脉相承。同时，百度也悄悄发布了百度旅行这样的试水产品
+腾讯入股艺龙，同程网等，也在尝试 QQ 旅游等产品&lt;/p&gt;
+
+&lt;p&gt;Update：不过，就在 2015.5 左右，携程宣布收购艺龙，非常戏剧性的局面啊……&lt;/p&gt;
+
+&lt;p&gt;为什么都要介入呢？
+一是互联网结合传统行业的大潮到来，大家都发现旅游行业是一个金矿，市场其实特别大……
+二是这个领域确实还有很多可以突破的商业模式存在，很多细分领域都开始有创业公司起来，整个行业的生态也越来越丰富：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.029.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这种时候，BAT 这样的土豪公司就想进来收网了 —— 砸钱也得砸出个平台来！
+所以，这一轮游戏一定能看到一次大洗牌（艺龙第一个就阵亡了）&lt;/p&gt;
+
+&lt;p&gt;那么，这轮革命怎么演变呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;一是模式融合&lt;/strong&gt;，以前做 OTA 的做 OTA，做渠道的做渠道，尝试做平台的做平台。现在，大家都知道平台模式可能是更好的形态，纷纷开始进化了。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;都做 OTA，拿下各种牛逼直营，最典型的就是航班&lt;/li&gt;
+  &lt;li&gt;都做平台，尤其是质量相对比较高的 B2C 平台。然后尝试可能的 C2C 产品形态 （去啊的客栈是一个很好的尝试）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.030.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;二是思路进化&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;从单一的购买/渠道业务转向服务平台。融合周边服务，拉上细分领域，外围行业一起玩&lt;/li&gt;
+  &lt;li&gt;强调用户体验与用户留存，强调&lt;strong&gt;一站式服务&lt;/strong&gt;、&lt;strong&gt;个性化服务&lt;/strong&gt; 等更极致的产品形态&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-alitrip-pd/post-alitrip-pd.031.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;而这些演变，正是 &lt;strong&gt;阿里旅行 · 去啊&lt;/strong&gt; 致力去做到的。从大版本 5.0 开始，淘宝旅行将 &lt;strong&gt;洗心革面&lt;/strong&gt;，去追求一个更极致，更垂直，体验更优秀的产品形态。&lt;/p&gt;
+
+&lt;p&gt;让我们一起见证去啊的成长，与在线旅游行业的变革吧！&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;em&gt;本篇完。&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;本文作者系前「阿里旅行 · 去啊」前端实习生，本文系业余时间学习之作。
+如有任何知识产权、版权问题或理论错误，还请指正。
+转载请注明原作者及以上信息。&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Mon, 15 Jun 2015 00:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2015/06/15/alitrip-strategy/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2015/06/15/alitrip-strategy/</guid>
+        
+        <category>产品设计</category>
+        
+        <category>阿里巴巴</category>
+        
+        <category>在线旅行</category>
+        
+        <category>电子商务</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>JavaScript Module Loader</title>
+        <description>&lt;h2 id=&quot;foreword&quot;&gt;Foreword&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Here comes Module!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;随着网站逐渐变成「互联网应用程序」，嵌入网页的 JavaScript 代码越来越庞大，越来越复杂。网页越来越像桌面程序，需要一个团队分工协作、进度管理、单元测试……我们不得不使用软件工程的方法，来管理网页的业务逻辑。&lt;/p&gt;
+
+&lt;p&gt;于是，JavaScript 的模块化成为迫切需求。在 ES6 Module 来临之前，JavaScript 社区提供了强大支持，尝试在现有的运行环境下，实现模块的效果。&lt;/p&gt;
+
+&lt;h2 id=&quot;commonjs--node&quot;&gt;CommonJS &amp;amp; Node&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Javascript: not just for browsers any more! —— CommonJS Slogen&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;前端模块化的事实标准之一，2009 年 8 月，&lt;a href=&quot;http://wiki.commonjs.org/wiki/CommonJS&quot;&gt;CommonJS&lt;/a&gt; 诞生。&lt;/p&gt;
+
+&lt;p&gt;CommonJS 本质上只是一套规范（API 定义），而 Node.js 采用并实现了部分规范，CommonJS Module 的写法也因此广泛流行。&lt;/p&gt;
+
+&lt;p&gt;让我们看看 Node 中的实现：&lt;/p&gt;
+
+&lt;p&gt;```
+// 由于 Node 原生支持模块的作用域，并不需要额外的 wrapper
+// “as though the module was wrapped in a function”&lt;/p&gt;
+
+&lt;p&gt;var a = require(‘./a’)  // 加载模块（同步加载）
+a.doSomething()         // 等上一句执行完才会执行&lt;/p&gt;
+
+&lt;p&gt;exports.b = function(){ // 暴露 b 函数接口
+  // do something
+}
+```&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;exports&lt;/code&gt;是一个内置对象，就像&lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;是一个内置加载函数一样。如果你希望直接赋值一个完整的对象或者构造函数，覆写&lt;code class=&quot;highlighter-rouge&quot;&gt;module.exports&lt;/code&gt;就可以了。&lt;/p&gt;
+
+&lt;p&gt;CommonJS 前身叫 ServerJS ，&lt;strong&gt;后来希望能更加 COMMON，成为通吃各种环境的模块规范，改名为 CommonJS&lt;/strong&gt; 。CommonJS 最初只专注于 Server-side 而非浏览器环境，因此它采用了同步加载的机制，这对服务器环境（硬盘 I/O 速度）不是问题，而对浏览器环境（网速）来说并不合适。&lt;/p&gt;
+
+&lt;p&gt;因此，各种适用于浏览器环境的模块框架与标准逐个诞生，他们的共同点是：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;采用异步加载（预先加载所有依赖的模块后回调执行，符合浏览器的网络环境）&lt;/li&gt;
+  &lt;li&gt;虽然代码风格不同，但其实都可以看作 CommonJS Modules 语法的变体。&lt;/li&gt;
+  &lt;li&gt;都在向着 &lt;strong&gt;COMMON&lt;/strong&gt; 的方向进化：&lt;strong&gt;兼容不同风格，兼容浏览器和服务器两种环境&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;本文接下来要讨论的典例是：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;RequireJS &amp;amp; AMD（异步加载，预执行，依赖前置。默认推荐 AMD 写法）&lt;/li&gt;
+  &lt;li&gt;SeaJS &amp;amp; CMD（异步加载，懒执行，依赖就近，默认推荐 CommonJS 写法）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;history&quot;&gt;History&lt;/h2&gt;
+
+&lt;!--&lt;h2 id=&quot;history&quot;&gt; History &lt;/h2&gt;--&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;此段落参考自玉伯的 &lt;a href=&quot;https://github.com/seajs/seajs/issues/588&quot;&gt;前端模块化开发那点历史&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;09-10 年间，CommonJS（那时还叫 ServerJS） 社区推出 &lt;a href=&quot;http://wiki.commonjs.org/wiki/Modules&quot;&gt;Modules/1.0&lt;/a&gt; 规范，并且在 Node.js 等环境下取得了很不错的实践。&lt;/p&gt;
+
+&lt;p&gt;09年下半年这帮充满干劲的小伙子们想把 ServerJS 的成功经验进一步推广到浏览器端，于是将社区改名叫 CommonJS，同时激烈争论 Modules 的下一版规范。分歧和冲突由此诞生，逐步形成了三大流派：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Modules/1.x&lt;/strong&gt; 流派。这个观点觉得 1.x 规范已经够用，只要移植到浏览器端就好。要做的是新增 &lt;a href=&quot;http://wiki.commonjs.org/wiki/Modules/Transport&quot;&gt;Modules/Transport&lt;/a&gt; 规范，即在浏览器上运行前，先通过转换工具将模块转换为符合 Transport 规范的代码。主流代表是服务端的开发人员。现在值得关注的有两个实现：越来越火的 component 和走在前沿的 es6 module transpiler。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Modules/Async&lt;/strong&gt; 流派。这个观点觉得浏览器有自身的特征，不应该直接用 Modules/1.x 规范。这个观点下的典型代表是 &lt;a href=&quot;http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition&quot;&gt;AMD&lt;/a&gt; 规范及其实现 &lt;a href=&quot;http://requirejs.org/&quot;&gt;RequireJS&lt;/a&gt;。这个稍后再细说。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Modules/2.0&lt;/strong&gt; 流派。这个观点觉得浏览器有自身的特征，不应该直接用 Modules/1.x 规范，但应该尽可能与 Modules/1.x 规范保持一致。这个观点下的典型代表是 BravoJS 和 FlyScript 的作者。BravoJS 作者对 CommonJS 的社区的贡献很大，这份 Modules/2.0-draft 规范花了很多心思。FlyScript 的作者提出了 Modules/Wrappings 规范，这规范是 CMD 规范的前身。可惜的是 BravoJS 太学院派，FlyScript 后来做了自我阉割，将整个网站（flyscript.org）下线了。这个观点在本文中的典型代表就是 SeaJS 和 CMD 了&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;补一嘴：阿里 KISSY 的 KMD 其实跟 AMD 非常类似，只是用 &lt;code class=&quot;highlighter-rouge&quot;&gt;add&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;use&lt;/code&gt; 两个源自于 YUI Modules 的函数名替换了 &lt;code class=&quot;highlighter-rouge&quot;&gt;define&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; ，但其原理更接近 RequireJS ，与 YUI Modules 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;Y&lt;/code&gt; 沙箱 Attach 机制并不相同&lt;/p&gt;
+
+&lt;h2 id=&quot;requirejs--amd&quot;&gt;RequireJS &amp;amp; AMD&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://wiki.commonjs.org/wiki/Modules/AsynchronousDefinition&quot;&gt;AMD (Async Module Definition)&lt;/a&gt; 是 RequireJS 在推广过程中对模块定义的规范化产出。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;RequireJS is a JavaScript file and module loader. It is optimized for in-browser use, but it can be used in other JavaScript environments&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;RequireJS 主要解决的还是 CommonJS 同步加载脚本不适合浏览器 这个问题：&lt;/p&gt;
+
+&lt;p&gt;```
+//CommonJS&lt;/p&gt;
+
+&lt;p&gt;var Employee = require(“types/Employee”);&lt;/p&gt;
+
+&lt;p&gt;function Programmer (){
+    //do something
+}&lt;/p&gt;
+
+&lt;p&gt;Programmer.prototype = new Employee();&lt;/p&gt;
+
+&lt;p&gt;//如果 require call 是异步的，那么肯定 error
+//因为在执行这句前 Employee 模块肯定来不及加载进来 
+```
+&amp;gt; As the comment indicates above, if require() is async, this code will not work. However, loading scripts synchronously in the browser kills performance. So, what to do?&lt;/p&gt;
+
+&lt;p&gt;所以我们需要 &lt;strong&gt;Function Wrapping&lt;/strong&gt; 来获取依赖并且提前通过 script tag 提前加载进来&lt;/p&gt;
+
+&lt;p&gt;```
+//AMD Wrapper&lt;/p&gt;
+
+&lt;p&gt;define(
+    [types/Employee],    //依赖
+    function(Employee){  //这个回调会在所有依赖都被加载后才执行&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    function Programmer(){
+        //do something
+    };
+
+    Programmer.prototype = new Employee();
+    return Programmer;  //return Constructor
+} ) ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;当依赖模块非常多时，这种&lt;strong&gt;依赖前置&lt;/strong&gt;的写法会显得有点奇怪，所以 AMD 给了一个语法糖， &lt;strong&gt;simplified CommonJS wrapping&lt;/strong&gt;，借鉴了 CommonJS 的 require 就近风格，也更方便对 CommonJS 模块的兼容：&lt;/p&gt;
+
+&lt;p&gt;```
+define(function (require) {
+    var dependency1 = require(‘dependency1’),
+        dependency2 = require(‘dependency2’);&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;return function () {}; }); ``` The AMD loader will parse out the `require(&#39;&#39;)` calls by using `Function.prototype.toString()`, then internally convert the above define call into this:
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;```
+define([‘require’, ‘dependency1’, ‘dependency2’], function (require) {
+    var dependency1 = require(‘dependency1’),
+        dependency2 = require(‘dependency2’);&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;return function () {}; }); ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;出于&lt;code class=&quot;highlighter-rouge&quot;&gt;Function.prototype.toString()&lt;/code&gt;兼容性和性能的考虑，最好的做法还是做一次 &lt;strong&gt;optimized build&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;AMD 和 CommonJS 的核心争议如下：&lt;/p&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;1. &lt;strong&gt;执行时机&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Modules/1.0:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+var a = require(&quot;./a&quot;) // 执行到此时，a.js 才同步下载并执行
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;AMD: （使用 require 的语法糖时）&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+define([&quot;require&quot;],function(require)){
+    // 在这里，a.js 已经下载并且执行好了
+    // 使用 require() 并不是 AMD 的推荐写法
+    var a = require(&quot;./a&quot;) // 此处仅仅是取模块 a 的 exports
+})
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;AMD 里提前下载 a.js 是出于对浏览器环境的考虑，只能采取异步下载，这个社区都认可（Sea.js 也是这么做的）&lt;/p&gt;
+
+&lt;p&gt;但是 AMD 的执行是 Early Executing，而 Modules/1.0 是第一次 require 时才执行。这个差异很多人不能接受，包括持 Modules/2.0 观点的人也不能接受。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;2. &lt;strong&gt;书写风格&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;AMD 推荐的风格并不使用&lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;，而是通过参数传入，破坏了&lt;strong&gt;依赖就近&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;```
+define([“a”, “b”, “c”],function(a, b, c){
+    // 提前申明了并初始化了所有模块&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;true || b.foo(); //即便根本没用到模块 b，但 b 还是提前执行了。 }) ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;不过，在笔者看来，风格喜好因人而异，主要还是&lt;strong&gt;预执行&lt;/strong&gt;和&lt;strong&gt;懒执行&lt;/strong&gt;的差异。&lt;/p&gt;
+
+&lt;p&gt;另外，require 2.0 也开始思考异步处理&lt;strong&gt;软依赖&lt;/strong&gt;（区别于一定需要的&lt;strong&gt;硬依赖&lt;/strong&gt;）的问题，提出了这样的方案：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+// 函数体内：
+if(status){
+    async([&#39;a&#39;],function(a){
+        a.doSomething()
+    })
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;seajs--cmd&quot;&gt;SeaJS &amp;amp; CMD&lt;/h2&gt;
+
+&lt;p&gt;CMD (Common Module Definition) 是 &lt;a href=&quot;http://seajs.org/docs/&quot;&gt;SeaJS&lt;/a&gt; 在推广过程中对模块定义的规范化产出，是 Modules/2.0 流派的支持者，因此 SeaJS 的模块写法尽可能与 Modules/1.x 规范保持一致。&lt;/p&gt;
+
+&lt;p&gt;不过目前国外的该流派都死得差不多了，RequireJS 目前成为浏览器端模块的事实标准，国内最有名气的就是玉伯的 Sea.js ，不过对国际的推广力度不够。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CMD Specification
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/cmdjs/specification/blob/master/draft/module.md&quot;&gt;English (CMDJS-repo)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/seajs/seajs/issues/242&quot;&gt;Chinese (SeaJS-repo)&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;CMD 主要有 define, factory, require, export 这么几个东西&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;define &lt;code class=&quot;highlighter-rouge&quot;&gt;define(id?, deps?, factory)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;factory &lt;code class=&quot;highlighter-rouge&quot;&gt;factory(require, exports, module)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;require &lt;code class=&quot;highlighter-rouge&quot;&gt;require(id)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;exports &lt;code class=&quot;highlighter-rouge&quot;&gt;Object&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;CMD 推荐的 Code Style 是使用 CommonJS 风格的 &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;这个 require 实际上是一个全局函数，用于加载模块，这里实际就是传入而已&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;```
+define(function(require, exports) {&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 获取模块 a 的接口
+var a = require(&#39;./a&#39;);
+// 调用模块 a 的方法
+a.doSomething();
+  
+// 对外提供 foo 属性
+exports.foo = &#39;bar&#39;;
+// 对外提供 doSomething 方法
+exports.doSomething = function() {};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;});
+```&lt;/p&gt;
+
+&lt;p&gt;但是你也可以使用 AMD 风格，或者使用 return 来进行模块暴露&lt;/p&gt;
+
+&lt;p&gt;```
+define(‘hello’, [‘jquery’], function(require, exports, module) {&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 模块代码...
+  
+// 直接通过 return 暴露接口
+return {
+    foo: &#39;bar&#39;,
+    doSomething: function() {}
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;});
+```&lt;/p&gt;
+
+&lt;p&gt;Sea.js 借鉴了 RequireJS 的不少东西，比如将 FlyScript 中的 module.declare 改名为 define 等。Sea.js 更多地来自 Modules/2.0 的观点，但尽可能去掉了学院派的东西，加入了不少实战派的理念。&lt;/p&gt;
+
+&lt;h2 id=&quot;amd-vs-cmd&quot;&gt;AMD vs CMD&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;虽然两者目前都兼容各种风格，但其底层原理并不相同，从其分别推荐的写法就可以看出两者背后原理的不同：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;对于依赖的模块，AMD 是&lt;strong&gt;提前执行&lt;/strong&gt;，CMD 是&lt;strong&gt;懒执行&lt;/strong&gt;。（都是先加载）
+    &lt;ul&gt;
+      &lt;li&gt;CMD 推崇&lt;strong&gt;依赖就近&lt;/strong&gt;，AMD 推崇&lt;strong&gt;依赖前置&lt;/strong&gt;。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;看代码：&lt;/p&gt;
+
+&lt;p&gt;```
+// AMD 默认推荐&lt;/p&gt;
+
+&lt;p&gt;define([’./a’, ‘./b’], function(a, b) {  // 依赖前置，提前执行&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a.doSomething()
+b.doSomething()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;})&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;```
+// CMD&lt;/p&gt;
+
+&lt;p&gt;define(function(require, exports, module) {&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var a = require(&#39;./a&#39;)
+a.doSomething()
+  
+var b = require(&#39;./b&#39;) // 依赖就近，延迟执行
+b.doSomething()  }) ```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;webpack&quot;&gt;WebPack&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;/2015/07/09/js-module-7day/&quot;&gt;请移步《JavaScript 模块化七日谈》&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 25 May 2015 00:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2015/05/25/js-module-loader/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2015/05/25/js-module-loader/</guid>
+        
+        <category>前端开发</category>
+        
+        <category>JavaScript</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>See you, Alibaba </title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;世界那么大，我想去看看&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Hi all&lt;br /&gt;
+这里是鬼栈的离职信。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-c-u-ali-team.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;review&quot;&gt;Review&lt;/h3&gt;
+
+&lt;p&gt;去年 5 月，大二的我拿到阿里的交互实习生 Offer，成为阿里的实习员工，刚好过去一个年头。&lt;/p&gt;
+
+&lt;p&gt;8 月，感谢 &lt;a href=&quot;http://weibo.com/jayli&quot;&gt;@拔赤&lt;/a&gt; 老大的提携，同意了我转岗到航旅前端团队的申请，分在了老大亲自带队的 &lt;strong&gt;航旅事业群-无线业务部-无线技术-前端团队-前端三组&lt;/strong&gt;，从此开始了一名&lt;strong&gt;前端程序猿&lt;/strong&gt;的职业生涯。&lt;/p&gt;
+
+&lt;p&gt;我的第一个 mentor 是大家的小师妹，我的 @晴舞 姐，不过很可惜的是她居然早于我离职，回北邮任教了。我跟着她在 H5 酒店 的业务线上学习、厮杀，从一个连 git 都用不熟的小小鬼，变成了一个可以独立战斗的小鬼。&lt;br /&gt;
+在 Acting H5 酒店/团购 业务线时，也非常感谢 @骏隆 的指导和信任，算是我的大半个 mentor 了。&lt;/p&gt;
+
+&lt;p&gt;我的第二个 mentor 是人超 nice 的 @智峰 师傅，前手机腾讯网主管，负责团队 CSS 框架，很有生活哲学的一个人。我们一起拿下了 h5 红包等工作，不过很可惜的是没机会从师傅身上学更多的 CSS 了。&lt;/p&gt;
+
+&lt;p&gt;有幸来阿里工作一遭，加入航旅前端团队，经历 离线包/容器共建 这样的牛逼项目，负责过酒店详情、团购详情重构、个人中心红包等工作，为象声汇做过第一版 Logo、海报、颁奖证书，进行过一次团队分享《聊聊产品与旅行》，更有幸认识大家。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;在航旅的 270 天里，我还经历了不少&lt;strong&gt;大事件&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一次 阿里 IPO （千载难逢的大事，可惜我没有股票，战利品是一件纪念 T 恤）&lt;/li&gt;
+  &lt;li&gt;一次 新品牌发布 （&lt;em&gt;阿里旅行·去啊&lt;/em&gt; 的发布，BU 的大事，战利品还是一件 T 恤）&lt;/li&gt;
+  &lt;li&gt;一次 年会 （北京 office 第一次大规模年会，马云老陆 Lucy 悉数到场）&lt;/li&gt;
+  &lt;li&gt;一次 双十一 （双十一购物狂欢节，有幸从内部参与一次）&lt;/li&gt;
+  &lt;li&gt;一次 Outing （每年才一次的公派娱乐，滑雪＋温泉记忆深刻）&lt;/li&gt;
+  &lt;li&gt;一次 Team Building（晴舞姐的 lastday ，难得的团建）&lt;/li&gt;
+  &lt;li&gt;一次 中秋节 （战利品是包装特别用心的“马云牌”月饼）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;真的运气非常好，不但该经历的都经历了，连 IPO 这么难得的也撞上了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-c-u-ali-memo.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;to-mates&quot;&gt;To Mates&lt;/h3&gt;
+
+&lt;p&gt;感谢大家这么多天的照顾！&lt;/p&gt;
+
+&lt;p&gt;无线组的小伙伴们：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;@拔赤：感谢老大！当年慕名而来，非常感谢“收留”&lt;/li&gt;
+  &lt;li&gt;@虎牙：超牛的虎牙！非常佩服，人也超 nice ，一直学习的对象&lt;/li&gt;
+  &lt;li&gt;@兰梦：大姐大！每次问问题都超级热心的解答，非常非常感谢&lt;/li&gt;
+  &lt;li&gt;@孝瓘：大哥大！技术超牛不说了，对我超级超级好，帮我解答问题送我回家什么的，特别感动。&lt;/li&gt;
+  &lt;li&gt;@豹子：双子座美女姐姐哈哈，前两天生日快乐哦，队花 BU 花！&lt;/li&gt;
+  &lt;li&gt;@弘树：简直学霸 &amp;amp; 学神！超年轻超钻，感觉以后会是阿里前端顶梁柱人物哟&lt;/li&gt;
+  &lt;li&gt;@若狸：猫爷！京腔儿～虽然总是在朋友圈骂 PD 不过其实特别靠谱活儿特别好哈哈哈&lt;/li&gt;
+  &lt;li&gt;@圣耀：首页守护神！加班时你总是在，然后一起分吃，的再去苦逼干活 OTZ&lt;/li&gt;
+  &lt;li&gt;@智峰：叶师傅！虽然总是不让我叫师兄互相学习云云，不过真的跟我说了很多人生哲理，超受用&lt;/li&gt;
+  &lt;li&gt;@擎黄：麦霸！特别聊得来，缘分大概最早来自于坐我旁边，你和舒博搬走时我超舍不得的 T T 你还记得你拿我机箱垫脚吗！&lt;/li&gt;
+  &lt;li&gt;@舒博：同上都是 90 后，聊得来！经常一起吃饭，Outing 的时候睡一屋，晚上打鼾完早上还会问我然后道歉特别萌哈哈哈&lt;/li&gt;
+  &lt;li&gt;@骏隆：分不清你是哪组！不过一起共事一起玩经常一起吃饭，特别 nice，非常非常感谢，一起做酒店时非常开心！&lt;/li&gt;
+  &lt;li&gt;@夕剑：虽然已经离职了看不到不过必须补上，机票的代名词！超 nice 超靠谱，又帅又有趣&lt;/li&gt;
+  &lt;li&gt;@晴舞：虽然已经离职了看不到不过必须补上，特别感谢的师姐，最难的开头都是你带我走过去的&lt;/li&gt;
+  &lt;li&gt;@已过：虽然已经转岗了看不到不过必须补上，一度觉得很像大反派！印象最深的就是刚进来 git 写错了看我 log 帮我回滚 OTZ，当时觉得特别凶&lt;/li&gt;
+  &lt;li&gt;@清锁：实习生小伙伴！你居然先我离职了喂。不过我知道你都签三方啦&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;其他组的我就捡比较熟悉的说啦：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;@银翘：校友师姐！特别萌，负责象声汇特别尽心尽力&lt;/li&gt;
+  &lt;li&gt;@皓勋：充满战斗力的小伙伴！超级青春洋溢，看好你哟～！&lt;/li&gt;
+  &lt;li&gt;@懂象：Hey Flasher！Flasher 果然都爱动画爱交互，很聊得来～&lt;/li&gt;
+  &lt;li&gt;@龙芒：好像一起打过球？哈哈哈其实没有原因就是觉得特别可爱！&lt;/li&gt;
+  &lt;li&gt;@伯元：咦是离职了吗？一起打过好久的球！&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;当然，还有很多前端、UED 、测试、后端、行政 的小伙伴们，就没法一一照顾到啦。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;希望所有人都能工作顺利（少加班）、生活开心（多旅游）、身体健康哈。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;future&quot;&gt;Future&lt;/h3&gt;
+
+&lt;p&gt;距离毕业还有一年多的光景，前路未卜，还是想到处逛逛，多看看再做选择。&lt;/p&gt;
+
+&lt;p&gt;在陆续看了几家公司后，我决定前往&lt;strong&gt;微信电影票&lt;/strong&gt;开始我的下一段旅程。特别巧的是，带队的饼饼居然也曾是我们团队的“老人”，花名 @痴灵&lt;/p&gt;
+
+&lt;p&gt;世界这么大，更要 Keep Contact.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;微信：@huxpro （都在群里）&lt;/li&gt;
+  &lt;li&gt;微博：@Hux黄玄&lt;/li&gt;
+  &lt;li&gt;知乎：@黄玄&lt;/li&gt;
+  &lt;li&gt;博客：&lt;a href=&quot;http://huangxuan.me&quot;&gt;http://huangxuan.me&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Hey，这里是编号 79717&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-c-u-ali-079717.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 11 May 2015 00:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2015/05/11/see-u-ali/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2015/05/11/see-u-ali/</guid>
+        
+        <category>生活</category>
+        
+        <category>阿里巴巴</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>hUX 随想录（二）：操作系统的浪漫主义 —— Metro 篇</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;操作系统的背后不只是冷冰冰的 0 和 1 ，数字时代的设计师们，如初神般刻画着新世界的秩序。信息、量子、宇宙，他们取世间万物为灵感来表达自己，那是它们对数字时代最浪漫的隐喻。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;前言&lt;/h2&gt;
+
+&lt;p&gt;操作系统，数字时代当之无愧的地基。当大部分从业人员都更关注它的技术与功能时，操作系统的 UI 设计师们却赋予了它无限的艺术气息：他们用充满着浪漫主义幻想色彩的设计语言，配合着物理定律般严谨的交互体系，描绘着自己心目中的数字世界，那些界面 的背后是他们对数字世界的思考、理解、期待、抽象与隐喻，&lt;strong&gt;这些艺术思想支撑着浮在表面的设计&lt;/strong&gt;。他们用一切你熟悉或不熟悉的方式，告诉世人：&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;“看呐，那个虚拟又真实的世界”&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;metro&quot;&gt;Metro&lt;/h2&gt;
+
+&lt;p&gt;我们第一个要聊的，就是 &lt;a href=&quot;http://en.wikipedia.org/wiki/Metro_(design_language\)&quot;&gt;Metro&lt;/a&gt; 。虽然它已经改名为 Modern UI ，虽然它作为 Windows Phone 、Windows 8 甚至 Windows 10 的 UI 风格算不上成功，但是作为一个设计语言，它却是声名显赫。以它而非 Windows 来命名这一章节，就是出于对它的敬意。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-metro-ui.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;众所周知 Metro 借鉴了交通标示语言、包豪斯现代风格与瑞士国际主义平面设计，其核心思想在于剔除多余信息，专注于内容传达（Content, not chrome），所以 Metro 采用了以 Typography、Color 为主要元素的视觉语言，另外它也非常重视动效设计（Motion Design），这是同期 UI 设计的共识，Motion provides meaning，动效对于表达隐喻有着巨大得作用。&lt;/p&gt;
+
+&lt;p&gt;我们暂且不去讨论 Metro 在实际运用中的情况，而是尝试去猜想一下 Metro 的设计师们对数字世界的思考，以及那些隐藏在 Metro 背后的奇思妙想：&lt;/p&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;思考 —— 极致抽象信息&lt;/h4&gt;
+
+&lt;p&gt;数字时代是基于信息的。这也是为什么我们称这个产业为 IT (Information Technology) ，我们每天使用 PC、Mobile 等数字设备、其实本质是主动或被动的接收、筛选、消化与产生信息。&lt;/p&gt;
+
+&lt;p&gt;语言与文字的发明是人类信息革命的第一个里程碑，掌握同种语言或文字的人类从此可以高效得进行信息的交换与传播。而现在我们正在走进人机交互与万物互联的时代：人类不但要和人类通信，还要和智能设备建立连接。历史总是上演着重复因此值得借鉴，为什么不把已经发明的东西在数字世界重新发明一次呢？&lt;strong&gt;于是 Cortana 承担了微软在数字时代复刻语音的使命，而 Metro 则继承了老祖宗文字的魔力。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;无论 Typography-based 还是 Content, not chrome ，&lt;strong&gt;Metro 试图对一切数字时代的信息进行一种非常极致的抽象 —— 我们的 UI 不需要来自真实世界的隐喻，我们只需要足够直接的信息。&lt;/strong&gt; 既然文字就是信息、图片就是信息、音视频就是信息，所以它们理所当然应该直接呈现；而所有的样式也都必须直接传达信息，于是网格和灰度表示层级，颜色的存在也更多代表着符号化的视觉传达：比如用于 VI 的品牌色，或者是刻板印象心情。&lt;/p&gt;
+
+&lt;p&gt;这种对信息简单粗暴的抽象使得 Metro 的首秀极具冲击，却也成为其日后发展最大的绊脚石。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;载体 —— 信息平面&lt;/h4&gt;
+
+&lt;p&gt;信息总归需要载体，而设计师们的目的就是寻找，或者创造一种介质来承载、传递、可视化这些信息，然后呈现给用户， 最后才得以成为 UI&lt;/p&gt;
+
+&lt;p&gt;我们都看着屏幕越来越趋于一种扁平的状态，所有设计师们理所当然的想到这种介质可能是一种类似平面的东西，比如说 WebOS 具有抽象意义的“卡片纸” ，或是 iOS/OS X 改变风格前使用的“亚麻桌布”，他们尝试告诉你藏在屏幕后面的数字世界，可能是由某种类似真实世界的平面状物体来承载信息的。&lt;br /&gt;
+而 Metro 则做得更加彻底，在它看来这种拟物是强加给数字世界的不必要信息，于是它抛开了所有自然界存在的元素，又一次将信息抽象做到了极致 ：其实那就是一个单纯放置信息的平面而已，或者说，&lt;strong&gt;其实是信息组成了这个平面，数字世界的信息根本无需额外的载体——文字与图像，一方面可以看作是狭义信息的载体，另一方面也可以被看作是广义信息的一种表现形态。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;所以我们可以看到 Metro UI 的背景经常是一个空旷的黑色，其实那个黑色代表着 Nothing ，意味着这个平面的下方没有任何东西。&lt;/strong&gt;而如果你在下方使用了图像作为背景，你就会发现这其实是两个平面 —— 上层是一个背景透明、漂浮在图像层上的信息平面。而下层则是另一个完全由图像信息组成的信息平面，当我们去划动上层时，产生的视差移动也在告诉我们：这是两个层级。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-metro-panorama.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在所有的 Metro 组件里，我印象最深刻的叫 Panorama Panel（上图） ，Panorama 在我看来是 Metro 对信息最直接的隐喻：&lt;strong&gt;不同的信息体，聚合成了一个完整的信息平面&lt;/strong&gt;。当我们在手机屏幕上左右滑动 Panorama 时就好像在操作一个摄像机平移镜头。这种“数字报纸”区别于报纸的最大感受就好像它可以随着信息的量级在 X 轴和 Y 轴 上无限延伸下去，变成一个信息的海洋，在你的面前流动。&lt;/p&gt;
+
+&lt;p&gt;对啊，那不就是信息流吗。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;世界 —— 卡片飞舞的世界&lt;/h4&gt;
+
+&lt;p&gt;我之所以不愿称 Metro 的信息平面为纸片，是因为它不能卷曲也不能折叠；&lt;br /&gt;
+而之所以不愿称 Metro 的信息平面为卡片，是因为它并非实体，而且尺寸无限；&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;可 Metro 的世界却又让我觉得是卡片飞舞的。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一张卡片的秩序是动态磁贴（Live Tiles），它很硬，只能翻转。却又具备魔力，好像在每一次的翻转中，信息都可以得到重组和再现。&lt;br /&gt;
+二张卡片的秩序是视差原理（Parallax），当你移动镜头时，任意两张卡片在你眼中的位移，都必须由它们距离屏幕 (Z=0) 的深度决定&lt;br /&gt;
+三张卡片的秩序就像飞来咒，原有的平面撤离，被呼唤的卡片俏皮的翻滚着从侧后方飞进视野，Metro UI 的动画设计隐喻着一切。&lt;/p&gt;
+
+&lt;p&gt;Status Bar 和 Application Bar 就像是紧贴在屏幕上的卡片，所以不受视差影响。而 Pivot Control 则更有魔幻色彩一点，你操纵它就如操作交通枢纽，指挥一个个小的信息片，来来去去在你的面前。&lt;/p&gt;
+
+&lt;p&gt;所有这些零厚度的卡片，或近，或远，最终组成了整个 Metro 世界。&lt;strong&gt;在我的想象里，那个次元就好像，所有的信息都以片状飞在空中，而你只能看见你所需要的那些，它们有条不紊的在纵横间穿梭，就好像到处都是信息流的交通轨道，你仿佛置身于，那个数据包飞来飞去、路由器控制地址的 —— 网路世界。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/post-metro-real.jpg&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;结语&lt;/h2&gt;
+
+&lt;p&gt;Metro 对信息极致的抽象与压平，与同期的 iOS 6- 风格形成鲜明对比，引发大家对于数字世界与用户界面的新一轮思考，里程碑式的推动了 Flat Design 在新一代数字设计中的普及。不过我们也知道 Metro UI 在微软的实际运用中却其实不成功，这又是为什么呢？&lt;/p&gt;
+
+&lt;p&gt;笔者抛砖引玉一些自己的观点：&lt;/p&gt;
+
+&lt;p&gt;当年 Metro 第一次运用在 Zune 身上时是非常惊艳的，风格超前、细节精致、动画细腻。再看现在的 Xbox （图一），Pivot 配合磁贴组、简单大气，几乎成为电视 UI 设计的模版。可偏偏在 PC 和 Mobile 两个场景，Metro 却饱受非议。&lt;/p&gt;
+
+&lt;p&gt;在我看来 PC 和 Mobile 其实代表着两个信息密度最高的场景、PC 是传统互联网的计算中心，而 Mobile 则是移动互联网和可以预见的未来内的个人计算中心。
+&lt;strong&gt;在如此复杂的场景下，其实 Metro 作为设计语言的尺度是不够的。&lt;/strong&gt;为什么这么说呢，虽然 Metro 对信息的抽象方式不无道理，但其实还是过分理想和纯粹了。有太多的屏幕像素因此被浪费，有太多其他维度的信息表达方式因此被舍弃掉了。&lt;/p&gt;
+
+&lt;p&gt;也就是说：Metro 这个设计语言本身是没有问题的，但是拿目前的它作为 PC/Mobile 这种操作系统级别的设计语言却是存在问题的。&lt;strong&gt;一个操作系统的设计语言与交互体系，一定不能太小，必须是一套包容性足够强又可被拓展和延伸的体系。&lt;/strong&gt;其实我们能看到 Windows Phone 的 UI 设计容纳度是非常低的，这或许就可以说明问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;这也是为什么 Win 10 for PC 和 Win 10 for Mobile 都开始削弱最初的那个纯粹的 Metro 体系，转而采用一种 Metro 的视觉语言混搭非 Metro 交互逻辑的方式来设计。&lt;/strong&gt;
+期待 new Metro (Metro 2.0) 能在 Win 10 上逐步走向成熟，让我们一同见证。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;本文是“操作系统的浪漫主义”系列的第一篇文章，如果您喜欢，请继续关注我的博客 ;)&lt;/p&gt;
+
+&lt;p&gt;尽请期待：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Android 篇&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;思考 —— 从卡片的层叠说起&lt;/li&gt;
+      &lt;li&gt;载体 —— 量子纸&lt;/li&gt;
+      &lt;li&gt;世界 —— 魔法材质统一世界&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;iOS 篇&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;思考 —— 盒子里的蒸汽朋克&lt;/li&gt;
+      &lt;li&gt;载体 —— 景深的无穷近与无穷远&lt;/li&gt;
+      &lt;li&gt;世界 —— 小宇宙里的小宇宙&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Wed, 15 Apr 2015 00:00:00 +0800</pubDate>
+        <link>http://huangxuan.me/2015/04/15/os-metro/</link>
+        <guid isPermaLink="true">http://huangxuan.me/2015/04/15/os-metro/</guid>
+        
+        <category>hUX 随想录</category>
+        
+        <category>UX Design</category>
+        
+        <category>Windows</category>
+        
+        <category>Metro</category>
+        
+        <category>OS</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
